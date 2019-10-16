@@ -27,15 +27,15 @@ const List = styled.div`
 
 class SubjectList extends React.Component {
   render() {
-    const { data } = this.props;
+    const { filteredData } = this.props;
 
-    if (data.lenght === 0) {
+    if (filteredData.lenght === 0) {
       return "Nema predmeti od toj profesor";
     }
     return (
       <Container>
         <List>
-          {data.map(subject => {
+          {filteredData.map(subject => {
             return <Subject key={subject.id} data={subject} />;
           })}
         </List>
@@ -44,23 +44,5 @@ class SubjectList extends React.Component {
   }
 }
 
-// class SubjectList extends React.Component {
-//   render() {
-//     const { filteredData } = this.props;
-
-//     if (filteredData.lenght === 0) {
-//       return "Nema predmeti od toj profesor";
-//     }
-//     return (
-//       <Container>
-//         <List>
-//           {filteredData.map(subject => {
-//             return <Subject key={subject.id} data={subject} />;
-//           })}
-//         </List>
-//       </Container>
-//     );
-//   }
-// }
-
 export default SubjectList;
+
