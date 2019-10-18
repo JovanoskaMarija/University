@@ -22,14 +22,7 @@ const Item = styled.div`
     margin: 0;
     padding: 10px;
     min-height: 70px;
-    /* background-color: #349cc7; */
     color: #349cc7;
-    span {
-      /* border: 1px solid white;
-      background-color: transparent;
-      border-radius: 50%;
-      color: white */
-    }
   }
   h4 {
     margin-top: 10px;
@@ -40,25 +33,43 @@ const Item = styled.div`
     text-indent: 30px;
     margin-top: 0;
     padding: 0 10px;
+    text-align: justify;
   }
+`;
+
+const Header = styled.div`
+  border-radius: 6px 6px 0 0;
+  height: 10px;
+  ${props =>
+    props.program === "new"
+      ? "background-color: red"
+      : "background-color: blue"};
+`;
+
+const Icons = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  flex-wrap: wrap;
 `;
 
 const Subject = props => {
   return (
     <Item>
+      <Header program={props.data.program}></Header>
       <h2>
         {props.data.name}
         <span>+</span>
       </h2>
       <h4>{props.data.professor}</h4>
       <p>{props.data.description}</p>
-      <div>
-        <button>{props.data.faculty}</button>
-        <button>{props.data.attendance}</button>
-        <button>{props.data.program}</button>
-        <button>{props.data.projects}</button>
-      </div>
-      <button>Select Subject</button>
+      <Icons>
+        <p>{props.data.faculty}</p>
+        <p>{props.data.attendance}</p>
+        <p>{props.data.program}</p>
+        <p>{props.data.projects}</p>
+        <p>{props.data.exam}</p>
+      </Icons>
     </Item>
   );
 };

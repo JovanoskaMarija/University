@@ -1,120 +1,152 @@
 import React, { Component } from "react";
 import styled from "styled-components";
+import { Dropdown } from "primereact/dropdown";
+import { SelectButton } from "primereact/selectbutton";
 
-// import { SelectButton } from '@bit/primefaces.primereact.selectbutton';
-// import PrimereactStyle from '@bit/primefaces.primereact.internal.stylelinks';
-
-// import { SelectButton } from "primereact/selectbutton";
-// import {MultiSelect} from 'primereact/multiselect';
-
-// import "primereact/resources/themes/nova-light/theme.css";
-// import "primereact/resources/primereact.min.css";
-// import "primeicons/primeicons.css";
+import "primereact/resources/themes/nova-light/theme.css";
+import "primereact/resources/primereact.min.css";
+import "primeicons/primeicons.css";
 
 const Filter = styled.div`
   width: 96%;
-  margin: auto;
+  margin: 20px;
   display: flex;
-  justify-content: space-between;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-content: center;
+  align-items: center;
+  flex-wrap: wrap;
   box-sizing: border-box;
-  margin-top: 30px;
   padding: 10px;
-  background-color: #ffffff;
-  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1),
-    0 2px 4px -1px rgba(0, 0, 0, 0.06);
+`;
+
+const Input = styled.input`
+  min-width: 240px;
+  margin: 10px;
+  color: blue;
+  background-color: white;
   border: none;
-  border-radius: 6px;
+  border-radius: 4px;
+  padding: 10px;
+  box-shadow: inset 0px 0px 11px 2px rgba(0, 0, 0, 0.2);
+`;
+
+const StyleSelectButton = styled(SelectButton)`
+  margin: 20px;
+  color: red;
+  background-color: yellow;
 `;
 
 class Filters extends Component {
-  constructor(props) {
-    super(props);
-  }
-  handleFilterProfessorChange = e => {
-    //console.log("Search text , ", e.target.name, e.target.value)
-    this.props.onFilterProfessorChange(e.target.value);
+  state = {
+    professor:"",
+    program: "",
+    exam: "",
+    semester: "",
+    difficulty: ""
   };
 
-  handleFilterNameChange = e => {
-    this.props.onFilterNameChange(e.target.value);
-  };
+  handleChange = e => {
+    const { name, value } = e.target;
 
-  handleFilterFacultyChange = e => {
-    this.props.onFilterFacultyChange(e.target.value);
+    this.setState({ [name]: value });
+    this.props.onFilterChange(name, value);
   };
 
   render() {
-    //let data = this.props.data;
-    //const options = this.props.program;
+    const programOptions = [
+      { label: "New", value: "new" },
+      { label: "Old", value: "old" }
+    ];
 
-    const option =[
-      {label: 'Audi', value: 'Audi'},
-      {label: 'BMW', value: 'BMW'},
-      {label: 'Fiat', value: 'Fiat'},
-      {label: 'Honda', value: 'Honda'},
-      {label: 'Jaguar', value: 'Jaguar'},
-      {label: 'Mercedes', value: 'Mercedes'},
-      {label: 'Renault', value: 'Renault'},
-      {label: 'VW', value: 'VW'},
-      {label: 'Volvo', value: 'Volvo'}
+    const examOptions = [
+      { label: "Exam", value: "exam" },
+      { label: "Midterms", value: "midterms" }
+    ];
 
-    ]
+    const semesterOptions = [
+      { label: "Winter", value: "winter" },
+      { label: "Summer", value: "summer" }
+    ];
+
+    const difficultyOptions = [
+      { label: "Easy", value: "easy" },
+      { label: "Medium", value: "medium" },
+      { label: "Difficult", value: "difficult" }
+    ];
     return (
       <Filter>
-        <form>
-          <input
-            type="text"
-            placeholder="Search Professor"
-            onChange={this.handleFilterProfessorChange}
-            value={this.props.filterProfessor}
-          />{" "}
+        <Input
+          type="text"
+          name="professor"
+          placeholder="Search Professor"
+          //onChange={this.handleFilterProfessorChange}
+          onChange={this.handleChange}
+          value={this.props.filterProfessor}
+        />
+        <Input
+          type="text"
+          name="name"
+          placeholder="Search Subject Name"
+          //onChange={this.handleFilterNameChange}
+          onChange={this.handleChange}
+          value={this.props.filterName}
+        />
+        <Input
+          type="text"
+          name="faculty"
+          placeholder="Search Faculty"
+          onChange={this.handleChange}
+          value={this.props.filterFaculty}
+        />
 
-          <input
-            type="text"
-            placeholder="Search Subject Name"
-            onChange={this.handleFilterNameChange}
-            value={this.props.filterName}
-          />{" "}
-
-          <input
-            type="text"
-            placeholder="Search Faculty"
-            onChange={this.handleFilterFacultyChange}
-            value={this.props.filterFaculty}
-          />{" "}
-
-          {/* <MultiSelect 
-            value={this.props.filterProfessor}
-            placeholder="Search Professor"
-            onChange={this.handleFilterProfessorChange}
-            filter={true}
-            options={option}
-          /> */}
-
-          {/* <SelectButton 
-            value={this.props.filterProgram} 
-            multiple={true} 
-            options={cars} 
-            onChange={(e) => this.setState({filterProgram: e.value})} 
-          /> */}
-          <br />
-          {/* <select onChange={this.handleTitleChange} >
-            {data &&
-              data.map(subjectDetails => (
-                <option value={subjectDetails.title} key={subjectDetails.id}>
-                  {subjectDetails.title}
-                </option>
-              ))}
-          </select>
-          <select>
-            {data &&
-              data.map(subjectDetails => (
-                <option value={subjectDetails.professor} key={subjectDetails.id}>
-                  {subjectDetails.professor}
-                </option>
-              ))}
-          </select> */}
-        </form>
+        <StyleSelectButton>
+        <SelectButton
+          value={this.state.program}
+          multiple={true}
+          options={programOptions}
+          name="program"
+          onChange={this.handleChange}
+          // onChange={this.handleFilterProgramChange}
+        />
+        </StyleSelectButton>
+        <SelectButton
+          value={this.state.exam}
+          multiple={true}
+          options={examOptions}
+          name="exam"
+          onChange={this.handleChange}
+        />
+        <SelectButton
+          value={this.state.semester}
+          multiple={true}
+          options={semesterOptions}
+          name="semester"
+          onChange={this.handleChange}
+        />
+        <SelectButton
+          value={this.state.difficulty}
+          multiple={true}
+          options={difficultyOptions}
+          name="difficulty"
+          onChange={this.handleChange}
+        />
+        {/* <Dropdown
+          value={this.props.difficulty}
+          options={difficulty}
+          onChange={this.onCarChange}
+          filter={true}
+          filterPlaceholder="Select difficulty"
+          filterBy="label,value"
+          showClear={true}
+        /> */}
+        {/* <MultiSelect
+          value={this.props.filterData}
+          placeholder="Search Professor"
+          onChange={this.handleFilterProfessorChange}
+          filter={true}
+        /> */}
+        
       </Filter>
     );
   }

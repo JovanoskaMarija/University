@@ -5,9 +5,7 @@ import SubjectList from "./SubjectList.js";
 
 import styled from "styled-components";
 
-const MainContainer = styled.div`
-  background-color: #f9f9f9;
-`;
+const MainContainer = styled.div``;
 
 class Container extends Component {
   constructor(props) {
@@ -16,27 +14,20 @@ class Container extends Component {
       filterProfessor: "",
       filterName: "",
       filterFaculty: "",
+      filterProgram: "",
+      filterExam: "",
+      filterSemester: "",
+      filterDifficulty: ""
     };
   }
 
-  handleFilterProfessorChange = searchProfesorText => {
-    this.setState({
-      filterProfessor: searchProfesorText
-    });
-  };
+  onFilterChange = (name, value) => {
+    const filterName = "filter" + name[0].toUpperCase() + name.slice(1);
 
-  handleFilterNameChange = searchNameText => {
-    //console.log("Pred , ", searchNameText)
-    this.setState({
-      filterName: searchNameText
-    });
+    //console.log({filterName, name, value})
+    //console.log("Filter imeto e :", filterName, name ,value)
+    this.setState({ [filterName]: value });
   };
-
-  handleFilterFacultyChange = searchFacultyText => {
-    this.setState({
-      filterFaculty: searchFacultyText
-    })
-  }
 
   filterByProfessor = subject => {
     return subject.professor
@@ -52,8 +43,37 @@ class Container extends Component {
 
   filterByFaculty = subject => {
     return subject.faculty
+      .toLowerCase()
       .includes(this.state.filterFaculty.toLowerCase());
   };
+
+  filterByProgram = subject => {
+    if (!this.state.filterProgram) {
+      return subject;
+    }
+    return this.state.filterProgram.includes(subject.program);
+  };
+
+  filterByExam = subject => {
+    if (!this.state.filterExam) {
+      return SubjectList;
+    }
+    return this.state.filterExam.includes(subject.exam);
+  };
+
+  filterBySemester = subject => {
+    if(!this.state.filterSemester){
+      return subject
+    }
+    return this.state.filterSemester.includes(subject.semester)
+  }
+
+  filterByDifficulty = subject => {
+    if(!this.state.filterDifficulty){
+      return subject
+    }
+    return this.state.filterDifficulty.includes(subject.difficulty)
+  }
 
   render() {
     const data = this.props.data;
@@ -61,19 +81,23 @@ class Container extends Component {
     const filteredData = data
       .filter(this.filterByProfessor)
       .filter(this.filterByName)
-      .filter(this.filterByFaculty);
+      .filter(this.filterByFaculty)
+      .filter(this.filterByProgram)
+      .filter(this.filterByExam)
+      .filter(this.filterBySemester)
+      .filter(this.filterByDifficulty)
 
     return (
       <MainContainer>
         <Menu />
         <Filters
           //data={data}
+          filteredData={filteredData}
           filterProfessor={this.state.filterProfessor}
           filterName={this.state.filterName}
           filterFaculty={this.state.filterFaculty}
-          onFilterProfessorChange={this.handleFilterProfessorChange}
-          onFilterNameChange={this.handleFilterNameChange}
-          onFilterFacultyChange={this.handleFilterFacultyChange}
+          filterProgram={this.state.filterProgram}
+          onFilterChange={this.onFilterChange}
         />
         <SubjectList
           //data={data}

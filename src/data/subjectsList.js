@@ -13,7 +13,7 @@ const SubjectList = [
     attendance: "mandatory",
     program: "old",
     projects: "elective",
-    midterms: 2
+    exam: "midterms"
   },
   {
     id: 2,
@@ -29,7 +29,7 @@ const SubjectList = [
     attendance: "mandatory",
     program: "new",
     projects: "elective",
-    midterms: 2
+    exam: "exam"
   },
   {
     id: 3,
@@ -45,7 +45,7 @@ const SubjectList = [
     attendance: "mandatory",
     program: "old",
     projects: "mandatory",
-    midterms: 2
+    exam: "exam"
   },
   {
     id: 4,
@@ -61,7 +61,7 @@ const SubjectList = [
     attendance: "mandatory",
     program: "new",
     projects: "elective",
-    midterms: 2
+    exam: "midterms"
   },
   {
     id: 5,
@@ -77,7 +77,7 @@ const SubjectList = [
     attendance: "mandatory",
     program: "old",
     projects: "elective",
-    midterms: 2
+    exam: "midterms"
   },
   {
     id: 6,
@@ -93,7 +93,7 @@ const SubjectList = [
     attendance: "mandatory",
     program: "new",
     projects: "mandatory",
-    midterms: 2
+    exam: "exam"
   },
   {
     id: 7,
@@ -109,7 +109,7 @@ const SubjectList = [
     attendance: "mandatory",
     program: "old",
     projects: "mandatory",
-    midterms: 2
+    exam: "exam"
   },
   {
     id: 8,
@@ -125,7 +125,7 @@ const SubjectList = [
     attendance: "mandatory",
     program: "new",
     projects: "elective",
-    midterms: 2
+    exam: 'midterms'
   }
 ];
 
