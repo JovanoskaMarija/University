@@ -23,9 +23,6 @@ class Container extends Component {
 
   onFilterChange = (name, value) => {
     const filterName = "filter" + name[0].toUpperCase() + name.slice(1);
-
-    //console.log({filterName, name, value})
-    //console.log("Filter imeto e :", filterName, name ,value)
     this.setState({ [filterName]: value });
   };
 
@@ -48,31 +45,19 @@ class Container extends Component {
   };
 
   filterByProgram = subject => {
-    if (!this.state.filterProgram) {
-      return subject;
-    }
-    return this.state.filterProgram.includes(subject.program);
+    return subject.program.includes(this.state.filterProgram);
   };
 
   filterByExam = subject => {
-    if (!this.state.filterExam) {
-      return SubjectList;
-    }
-    return this.state.filterExam.includes(subject.exam);
+    return subject.exam.includes(this.state.filterExam);
   };
 
   filterBySemester = subject => {
-    if(!this.state.filterSemester){
-      return subject
-    }
-    return this.state.filterSemester.includes(subject.semester)
+    return subject.semester.includes(this.state.filterSemester)
   }
 
   filterByDifficulty = subject => {
-    if(!this.state.filterDifficulty){
-      return subject
-    }
-    return this.state.filterDifficulty.includes(subject.difficulty)
+    return subject.difficulty.includes(this.state.filterDifficulty)
   }
 
   render() {
@@ -91,7 +76,6 @@ class Container extends Component {
       <MainContainer>
         <Menu />
         <Filters
-          //data={data}
           filteredData={filteredData}
           filterProfessor={this.state.filterProfessor}
           filterName={this.state.filterName}
@@ -100,7 +84,6 @@ class Container extends Component {
           onFilterChange={this.onFilterChange}
         />
         <SubjectList
-          //data={data}
           filteredData={filteredData}
         />
       </MainContainer>
