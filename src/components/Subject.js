@@ -1,17 +1,24 @@
 import React from "react";
 import styled from "styled-components";
+import {
+  IconAdd,
+  IconPaw,
+  IconTshirt,
+  IconHamburger,
+  IconCafe,
+  IconGuitar,
+  IconMenu
+} from "../icons/Icons";
 
 const Item = styled.div`
-  display: flex;
-  flex-direction: column;
   box-sizing: border-box;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
   max-width: 300px;
-  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.2),
-    0 2px 4px -1px rgba(0, 0, 0, 0.2);
-  /* border: 2px solid #349cc7; */
+  box-shadow: 2px 2px 4px 3px rgba(177, 177, 177, 0.4);
   border-radius: 6px;
   margin: 20px;
-  padding-bottom: 10px;
   background-color: white;
   color: grey;
   h2 {
@@ -19,57 +26,143 @@ const Item = styled.div`
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
-    margin: 0;
-    padding: 10px;
-    min-height: 70px;
+    margin-right: 10px;
+    padding: 10px 20px 10px 10px;
+    height: 70px;
     color: #349cc7;
   }
   h4 {
     margin-top: 10px;
-    padding-right: 10px;
-    align-self: flex-end;
+    padding: 0 20px 0 10px;
   }
   p {
     text-indent: 30px;
     margin-top: 0;
-    padding: 0 10px;
+    padding: 0 20px 0 10px;
     text-align: justify;
   }
 `;
 
-const Header = styled.div`
-  border-radius: 6px 6px 0 0;
-  height: 10px;
+const SideColor = styled.div`
+  border-radius: 6px 0 0 6px;
+  height: 100%;
+  width: 30px;
+  margin-right: 10px;
   ${props =>
     props.program === "new"
-      ? "background-color: red"
-      : "background-color: blue"};
+      ? "background-color: #add7e8"
+      : "background-color: #246d8b"};
 `;
 
 const Icons = styled.div`
+  box-sizing: border-box;
   display: flex;
   flex-direction: row;
-  justify-content: flex-start;
+  justify-content: space-evenly;
+  align-content: flex-end;
   flex-wrap: wrap;
+  padding: 10px;
+  margin: 0;
+`;
+
+const Tooltip = styled.div`
+  span {
+    position: relative;
+    padding: 2px;
+    font-size: 20px;
+    cursor: help;
+  }
+
+  span::before,
+  span::after {
+    position: absolute;
+    left: 40%;
+    opacity: 0;
+    transition: all ease 0.1s;
+    z-index: 1;
+  }
+
+  span::before {
+    content: "";
+    border-width: 0 4px 5px 4px;
+    border-style: solid;
+    border-color: transparent transparent #373737 transparent;
+    transform: translateX(-50%);
+    transform: translateY(-150%);
+    margin-left: -4px;
+    margin-top: 40px;
+  }
+
+  span::after {
+    content: attr(data-tooltip);
+    background: #373737;
+    font-size: 14px;
+    margin-left: -52px;
+    width: 100px;
+    border-radius: 10px;
+    color: #eee;
+    padding: 5px 0;
+    margin-top: 40px;
+    text-align: center;
+  }
+
+  /* Hover states */
+
+  span:hover::before,
+  span:hover::after {
+    opacity: 1;
+  }
 `;
 
 const Subject = props => {
   return (
     <Item>
-      <Header program={props.data.program}></Header>
-      <h2>
-        {props.data.name}
-        <span>+</span>
-      </h2>
-      <h4>{props.data.professor}</h4>
-      <p>{props.data.description}</p>
-      <Icons>
-        <p>{props.data.faculty}</p>
-        <p>{props.data.attendance}</p>
-        <p>{props.data.program}</p>
-        <p>{props.data.projects}</p>
-        <p>{props.data.exam}</p>
-      </Icons>
+      <SideColor program={props.data.program} />
+
+      <div>
+        <h2>
+          {props.data.name}
+          <IconAdd />
+        </h2>
+        <h4>{props.data.professor}</h4>
+        <p>{props.data.description}</p>
+        <Icons>
+          <Tooltip>
+            <span data-tooltip="Professor">
+              <IconMenu />
+            </span>
+          </Tooltip>
+          <Tooltip>
+            <span data-tooltip="Attendance">
+              <IconGuitar />
+            </span>
+          </Tooltip>
+          <Tooltip>
+            <span data-tooltip="Faculty">
+              <IconHamburger />
+            </span>
+          </Tooltip>
+          {/* {props.data.attendance} */}
+        </Icons>
+        <Icons>
+          <Tooltip>
+            <span data-tooltip="Program">
+              <IconPaw />
+            </span>
+          </Tooltip>
+          <Tooltip>
+            <span data-tooltip="Projects">
+              <IconTshirt />
+            </span>
+          </Tooltip>
+          <Tooltip>
+            <span data-tooltip="Exam">
+              <IconCafe />
+            </span>
+          </Tooltip>
+          {/* {props.data.attendance} */}
+        </Icons>
+      </div>
     </Item>
   );
 };

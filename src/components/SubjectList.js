@@ -3,15 +3,15 @@ import styled from "styled-components";
 import Subject from "./Subject.js";
 
 const Container = styled.div`
-  height: 500px;
+  height: 550px;
   overflow-y: scroll;
   margin: auto;
   display: flex;
-  justify-content: space-around;
   box-sizing: border-box;
   margin-top: 30px;
   padding: 20px;
   background-color: rgba(0,0,0,0.02);
+  border-top: 1px solid red;
   overflow-y: scroll;
   overflow-x: hidden;
   &::-webkit-scrollbar-track {
