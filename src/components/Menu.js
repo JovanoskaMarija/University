@@ -1,30 +1,38 @@
 import React from "react";
 import { Link } from "@reach/router";
-import styled from "styled-components";
+import {Header, NavigationBar} from '../styles/MenuStyle'
 
-const Header = styled.div`
-  box-sizing: border-box;
-  display: flex;
-  justify-content: space-between;
-  border: none;
-  padding: 10px;
-  h3 { margin: 0;}
-`;
 
-const NavigationBar = styled.div`
-    display:flex;
-    justify-content: space-between;
-    width:20%;
-    a{text-decoration: none; color: #000000}
-`;
+const NavLink = props => (
+  <Link
+    {...props}
+    getProps={({ isCurrent }) => {
+      // the object returned here is passed to the
+      // anchor element's props
+      return {
+        style: {
+          fontWeight: "bold",
+          color: isCurrent ? "#246d8b" : "#349cc7",
+          textShadow: isCurrent ? "2px 2px 5px rgba(128,128,128,0.4)" : null,
+        }
+      };
+    }
+  }
+  />
+);
+
 
 const Menu = () => {
   return (
     <Header>
       <h3>University</h3>
       <NavigationBar>
-        <Link to="/subjects">Subjects</Link>
-        <Link to="/selected-subjects">Selected Subjects</Link>
+        <NavLink
+          to="/subjects"
+        >
+          Subjects
+        </NavLink>
+        <NavLink to="/selected">Selected Subjects</NavLink>
       </NavigationBar>
     </Header>
   );

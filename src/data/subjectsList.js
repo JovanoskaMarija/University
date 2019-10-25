@@ -1,4 +1,4 @@
-const SubjectList = [
+const subjectList = [
   {
     id: 1,
     name: "Algorithm And data structure",
@@ -13,7 +13,9 @@ const SubjectList = [
     attendance: "mandatory",
     program: "old",
     projects: "elective",
-    exam: "midterms"
+    exam: "midterms",
+    isSelected: false,
+    isPassed: false,
   },
   {
     id: 2,
@@ -29,7 +31,9 @@ const SubjectList = [
     attendance: "mandatory",
     program: "new",
     projects: "elective",
-    exam: "exam"
+    exam: "exam",
+    isSelected: false,
+    isPassed: false,
   },
   {
     id: 3,
@@ -45,7 +49,9 @@ const SubjectList = [
     attendance: "mandatory",
     program: "old",
     projects: "mandatory",
-    exam: "exam"
+    exam: "exam",
+    isSelected: false,
+    isPassed: false,
   },
   {
     id: 4,
@@ -61,7 +67,9 @@ const SubjectList = [
     attendance: "mandatory",
     program: "new",
     projects: "elective",
-    exam: "midterms"
+    exam: "midterms",
+    isSelected: false,
+    isPassed: false,
   },
   {
     id: 5,
@@ -77,7 +85,9 @@ const SubjectList = [
     attendance: "mandatory",
     program: "old",
     projects: "elective",
-    exam: "midterms"
+    exam: "midterms",
+    isSelected: false,
+    isPassed: false,
   },
   {
     id: 6,
@@ -93,7 +103,9 @@ const SubjectList = [
     attendance: "mandatory",
     program: "new",
     projects: "mandatory",
-    exam: "exam"
+    exam: "exam",
+    isSelected: false,
+    isPassed: false,
   },
   {
     id: 7,
@@ -109,7 +121,9 @@ const SubjectList = [
     attendance: "mandatory",
     program: "old",
     projects: "mandatory",
-    exam: "exam"
+    exam: "exam",
+    isSelected: false,
+    isPassed: false,
   },
   {
     id: 8,
@@ -125,8 +139,10 @@ const SubjectList = [
     attendance: "mandatory",
     program: "new",
     projects: "elective",
-    exam: 'midterms'
+    exam: 'midterms',
+    isSelected: false,
+    isPassed: false,
   }
 ];
 
-export default SubjectList;
+export default subjectList;

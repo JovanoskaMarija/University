@@ -1,5 +1,4 @@
 import React from 'react';
-import {Icon} from 'react-icons-kit';
 import { withBaseIcon } from 'react-icons-kit'
 import {paw} from 'react-icons-kit/fa/paw';
 import {plusCircle} from 'react-icons-kit/fa/plusCircle'
@@ -11,10 +10,6 @@ import {menu4} from 'react-icons-kit/icomoon/menu4'
 
 const IconContainer = 
 withBaseIcon({ size: "100%", style:{width: 40, height: 40} })
-
-//const
-//style={{width: 24, height: 24}}
-    // withBaseIcon({ size: "100%",  style: {color: '#EF233C', margin:0 , padding:0, textAlign: "center", width: 30, height: 30}})
 
 export const IconPaw = () => <IconContainer icon={paw} />
 export const IconAdd = () => <IconContainer icon={plusCircle} />

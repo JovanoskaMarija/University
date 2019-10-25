@@ -1,20 +1,22 @@
 import React from "react";
-import {Container, List} from '../styles/SubjectListStyle'
+import { Container, List } from "../styles/SubjectListStyle";
 import Subject from "./Subject.js";
-
 
 class SubjectList extends React.Component {
   render() {
-    const { filteredData } = this.props;
-
-    if (filteredData.lenght === 0) {
-      return "Nema predmeti od toj profesor";
-    }
+    const { filteredData, handleSelected, handlePassed } = this.props;
     return (
       <Container>
         <List>
           {filteredData.map(subject => {
-            return <Subject key={subject.id} data={subject} />;
+            return (
+              <Subject
+                key={subject.id}
+                data={subject}
+                handleSelected={handleSelected}
+                handlePassed={handlePassed}
+              />
+            );
           })}
         </List>
       </Container>
@@ -23,4 +25,3 @@ class SubjectList extends React.Component {
 }
 
 export default SubjectList;
-

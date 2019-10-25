@@ -5,22 +5,13 @@ export const Item = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
-  max-width: 300px;
+  max-width: 330px;
   box-shadow: 2px 2px 4px 3px rgba(177, 177, 177, 0.4);
   border-radius: 6px;
   margin: 20px;
   background-color: white;
   color: grey;
-  h2 {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-    margin-right: 10px;
-    padding: 10px 20px 10px 10px;
-    height: 70px;
-    color: #349cc7;
-  }
+
   h4 {
     margin-top: 10px;
     padding: 0 20px 0 10px;
@@ -39,9 +30,36 @@ export const SideColor = styled.div`
   width: 30px;
   margin-right: 10px;
   ${props =>
-    props.program === "new"
-      ? "background-color: #add7e8"
-      : "background-color: #246d8b"};
+    props.isSelected 
+      ? "background-color: #246d8b"
+      : "background-color: #add7e8"};
+`;
+
+export const Header = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-content: center;
+  h2 {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-right: 10px;
+    padding: 10px 20px 10px 10px;
+    height: 60px;
+    color: #349cc7;
+    ${props =>
+    props.isSelected 
+      ? "color: #246d8b; text-shadow: 2px 2px 5px rgba(128,128,128,0.4)"
+      : null};
+  }
+  div {
+    margin-right: -7px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+    align-content: center;
+  }
 `;
 
 export const Icons = styled.div`
@@ -59,7 +77,7 @@ export const Tooltip = styled.div`
   span {
     position: relative;
     padding: 2px;
-    font-size: 20px;
+    font-size: 16px;
     cursor: pointer;
   }
 

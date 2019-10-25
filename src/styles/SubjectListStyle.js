@@ -1,10 +1,11 @@
 import styled from "styled-components";
 
 export const Container = styled.div`
-  height: 550px;
+  height: calc(74vh );
   overflow-y: scroll;
   margin: auto;
   display: flex;
+  justify-content: space-evenly;
   box-sizing: border-box;
   margin-top: 30px;
   padding: 20px;
@@ -31,5 +32,6 @@ export const List = styled.div`
   box-sizing: border-box;
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-around;
+  align-content: flex-start;
+  justify-content: space-evenly;
 `;

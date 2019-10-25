@@ -1,7 +1,8 @@
 import React, { Component } from "react";
-import {Filter, Separator} from '../styles/FiltersStyle'
+import { Filter, Separator } from "../styles/FiltersStyle";
 import { InputText } from "primereact/inputtext";
 import { SelectButton } from "primereact/selectbutton";
+import { ToggleButton } from "primereact/togglebutton";
 
 import "primereact/resources/themes/nova-light/theme.css";
 import "primereact/resources/primereact.min.css";
@@ -9,16 +10,17 @@ import "primeicons/primeicons.css";
 
 class Filters extends Component {
   state = {
+    checked: false,
     professor: "",
     program: "",
     exam: "",
     semester: "",
-    difficulty: ""
+    difficulty: "",
+    isPassed: false
   };
 
   handleChange = e => {
     const { name, value } = e.target;
-
     this.setState({ [name]: value });
     this.props.onFilterChange(name, value);
   };
@@ -44,46 +46,62 @@ class Filters extends Component {
       { label: "Medium", value: "medium" },
       { label: "Difficult", value: "difficult" }
     ];
+
+    const isPassedOptions = [{ label: "Passed", value: true }];
+
     return (
       <Filter>
+        <div>
+          <ToggleButton
+            onLabel="Filters"
+            offLabel="Filters"
+            checked={!this.state.checked}
+            onChange={e =>
+              this.setState(
+                { checked: !this.state.checked },
+                console.log("Posle", this.state.checked)
+              )
+            }
+          />
+        </div>
         <Separator>
-        <InputText
-          id="float-input"
-          type="text"
-          size="30"
-          name="professor"
-          placeholder="Search Professor"
-          value={this.props.filterProfessor}
-          onChange={this.handleChange}
-          tooltip="Professor"
-          tooltipOptions={{ position: "bottom" }}
-        /> 
+          <InputText
+            id="float-input"
+            type="text"
+            size="30"
+            name="professor"
+            placeholder="Search Professor"
+            value={this.props.filterProfessor}
+            onChange={this.handleChange}
+            tooltip="Professor"
+            tooltipOptions={{ position: "bottom" }}
+          />
         </Separator>
         <Separator>
           <InputText
-          id="float-input"
-          type="text"
-          size="30"
-          name="name"
-          placeholder="Search Subject Name"
-          value={this.props.filterName}
-          onChange={this.handleChange}
-          tooltip="Name"
-          tooltipOptions={{ position: "bottom" }}
-        />
+            id="float-input"
+            type="text"
+            size="30"
+            name="name"
+            placeholder="Search Subject Name"
+            value={this.props.filterName}
+            onChange={this.handleChange}
+            tooltip="Name"
+            tooltipOptions={{ position: "bottom" }}
+          />
         </Separator>
         <Separator>
           <InputText
-          id="float-input"
-          type="text"
-          size="30"
-          name="faculty"
-          placeholder="Search Faculty"
-          value={this.props.filterFaculty}
-          onChange={this.handleChange}
-          tooltip="Faculty"
-          tooltipOptions={{ position: "bottom" }}
-        />
+            id="float-input"
+            type="text"
+            size="30"
+            name="faculty"
+            placeholder="Search Faculty"
+            value={this.props.filterFaculty}
+            onChange={this.handleChange}
+            tooltip="Faculty"
+            tooltipOptions={{ position: "bottom" }}
+          />
         </Separator>
         <Separator>
           <SelectButton
@@ -107,7 +125,6 @@ class Filters extends Component {
             tooltipOptions={{ position: "bottom" }}
           />
         </Separator>
-
         <Separator>
           <SelectButton
             value={this.state.semester}
@@ -130,7 +147,18 @@ class Filters extends Component {
             tooltipOptions={{ position: "bottom" }}
           />
         </Separator>
-
+        <Separator>
+          <SelectButton
+            value={this.state.isPassed}
+            multiple={true}
+            options={isPassedOptions}
+            name="isPassed"
+            onChange={this.handleChange}
+            tooltip="Passed"
+            tooltipOptions={{ position: "bottom" }}
+          />
+        </Separator>
+        
       </Filter>
     );
   }
