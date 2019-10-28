@@ -1,4 +1,6 @@
 import React from "react";
+import { ToggleButton } from "primereact/togglebutton";
+import { Link } from "@reach/router";
 import {
   IconPaw,
   IconTshirt,
@@ -15,7 +17,6 @@ import {
   Icons,
   Tooltip
 } from "../styles/SubjectStyle";
-import { ToggleButton } from "primereact/togglebutton";
 
 const Subject = props => {
   return (
@@ -30,7 +31,7 @@ const Subject = props => {
               name="isSelected"
               onIcon="pi pi-check"
               offIcon="pi pi-times"
-              //becouse checkbox is uncontrolled we set default checked value to be equal to the value assigned in the mock
+              //because checkbox is uncontrolled we set default checked value to be equal to the value assigned in the mock
               checked={props.data.isSelected}
               onChange={e => {
                 props.handleSelected(props.data.id);
@@ -54,14 +55,14 @@ const Subject = props => {
         </Header>
 
         <h4>{props.data.professor}</h4>
-        <p>{props.data.description}</p>
+        <div>
+          {props.data.description}
+          <Link to={`/subjects/${props.data.id}`}>
+            <span>Read More</span>
+          </Link>
+        </div>
         <Icons>
-          <Tooltip
-          // onClick={() => {
-          //   console.log("rabotam");
-          //   props.handlePassed(props.data.id);
-          // }}
-          >
+          <Tooltip>
             <span data-tooltip="Professor">
               <IconMenu />
             </span>
