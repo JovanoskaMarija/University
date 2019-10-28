@@ -1,8 +1,10 @@
 import React, { Component } from "react";
 import { Router } from "@reach/router";
 import Menu from "./Menu.js";
-import Filters from "./Filters.js";
-import SubjectList from "./SubjectList.js";
+// import Filters from "./Filters.js";
+// import SubjectList from "./SubjectList.js";
+import SubjectDetails from "./SubjectDetails";
+import SubjectsContainer from "./SubjectsContainer";
 import styled from "styled-components";
 import subjectlist from "../data/subjectsList";
 
@@ -33,7 +35,6 @@ class Container extends Component {
   handleSelected = subjectID => {
     this.setState(prevState => {
       const oldSubjectList = prevState.subjects;
-      // od stari do novi, razlikata e shto samo vo eden predmet,ima sega isSelected smeneto
       const newSubjectList = oldSubjectList.map(subject => {
         if (subject.id === subjectID) {
           const newSubject = subject;
@@ -82,9 +83,6 @@ class Container extends Component {
   };
 
   filterByProgram = subject => {
-    // console.log(subject);
-    // console.log(this.state.filterProgram);
-    // if(!this.state.filterProgram || !this.state.filterProgram.length){     proveruvame dali stringot e prazen ili nizata e prazna vo zavisno kako sme go definirale vo state dali e string ili e niza
     if (!this.state.filterProgram.length) {
       return subject;
     }
@@ -121,7 +119,7 @@ class Container extends Component {
 
   filterByPassed = subject => {
     if (!this.state.filterIsPassed.length) {
-      if(!subject.isPassed){
+      if (!subject.isPassed) {
         return subject;
       }
     }
@@ -129,14 +127,6 @@ class Container extends Component {
   };
 
   componentDidMount() {
-    // const fetchSubjectList = async () => {
-    //   const subjectList = await new Promise(resolve =>
-    //       resolve(sl)
-    //   )
-    //   this.setState({ subjects :subjectList})
-    // }
-    // fetchSubjectList();
-
     this.setState({ subjects: subjectlist });
   }
 
@@ -154,37 +144,52 @@ class Container extends Component {
       .filter(this.filterBySelected)
       .filter(this.filterByPassed);
 
-const filterSelected = data.filter(subject => subject.isSelected)
+    const filterSelected = data
+      .filter(subject => subject.isSelected)
+      .filter(this.filterByProfessor)
+      .filter(this.filterByName)
+      .filter(this.filterByFaculty)
+      .filter(this.filterByProgram)
+      .filter(this.filterByExam)
+      .filter(this.filterBySemester)
+      .filter(this.filterByDifficulty)
+      .filter(this.filterByPassed);;
     return (
       <MainContainer>
         <Menu />
-        <Filters
-          filteredData={filteredData}
-          filterProfessor={this.state.filterProfessor}
-          filterName={this.state.filterName}
-          filterFaculty={this.state.filterFaculty}
-          filterProgram={this.state.filterProgram}
-          filterIsSelected={this.state.filterIsSelected}
-          filterIsPassed={this.state.IsPassed}
-          onFilterChange={this.onFilterChange}
-        />
         <Router>
-          <SubjectList
+          <SubjectsContainer
+            path="/subjects"
+            filteredData={filteredData}
+            filterProfessor={this.state.filterProfessor}
+            filterName={this.state.filterName}
+            filterFaculty={this.state.filterFaculty}
+            filterProgram={this.state.filterProgram}
+            filterIsSelected={this.state.filterIsSelected}
+            filterIsPassed={this.state.IsPassed}
+            onFilterChange={this.onFilterChange}
             handleSelected={this.handleSelected}
             handlePassed={this.handlePassed}
-            filteredData={filteredData}
-            path="/subjects"
           />
-          <SubjectList 
-           handleSelected={this.handleSelected}
-           handlePassed={this.handlePassed}
+          <SubjectsContainer
+            path="/selected"
             filteredData={filterSelected}
-            path="/selected" 
-          />   
+            filterProfessor={this.state.filterProfessor}
+            filterName={this.state.filterName}
+            filterFaculty={this.state.filterFaculty}
+            filterProgram={this.state.filterProgram}
+            filterIsSelected={this.state.filterIsSelected}
+            filterIsPassed={this.state.IsPassed}
+            onFilterChange={this.onFilterChange}
+            handleSelected={this.handleSelected}
+            handlePassed={this.handlePassed}
+          />
+          <SubjectDetails
+            data={data}
+            handleSelected={this.handleSelected}
+            path="/subjects/:subjectId"
+          />
         </Router>
-        {/* <SubjectList
-          filteredData={filteredData}
-        /> */}
       </MainContainer>
     );
   }
