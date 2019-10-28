@@ -1,7 +1,6 @@
 import React from "react";
 import { Link } from "@reach/router";
-import {Header, NavigationBar} from '../styles/MenuStyle'
-
+import { Header, NavigationBar } from "../styles/MenuStyle";
 
 const NavLink = props => (
   <Link
@@ -13,25 +12,21 @@ const NavLink = props => (
         style: {
           fontWeight: "bold",
           color: isCurrent ? "#246d8b" : "#349cc7",
-          textShadow: isCurrent ? "2px 2px 5px rgba(128,128,128,0.4)" : null,
+          textShadow: isCurrent ? "2px 2px 5px rgba(128,128,128,0.4)" : null
         }
       };
-    }
-  }
+    }}
   />
 );
-
 
 const Menu = () => {
   return (
     <Header>
-      <h3>University</h3>
+      <h3>
+        <NavLink to="/">University</NavLink>
+      </h3>
       <NavigationBar>
-        <NavLink
-          to="/subjects"
-        >
-          Subjects
-        </NavLink>
+        <NavLink to="/subjects">Subjects</NavLink>
         <NavLink to="/selected">Selected Subjects</NavLink>
       </NavigationBar>
     </Header>
