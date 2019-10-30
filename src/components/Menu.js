@@ -10,8 +10,7 @@ const NavLink = props => (
       // anchor element's props
       return {
         style: {
-          fontWeight: "bold",
-          color: isCurrent ? "#246d8b" : "#349cc7",
+          fontStyle: isCurrent ? "italic" : null,
           textShadow: isCurrent ? "2px 2px 5px rgba(128,128,128,0.4)" : null
         }
       };
@@ -22,12 +21,12 @@ const NavLink = props => (
 const Menu = () => {
   return (
     <Header>
-      <h3>
+      <NavigationBar>
         <NavLink to="/">University</NavLink>
-      </h3>
+      </NavigationBar>
       <NavigationBar>
         <NavLink to="/subjects">Subjects</NavLink>
-        <NavLink to="/selected">Selected Subjects</NavLink>
+        <NavLink to="/selected">Selected</NavLink>
       </NavigationBar>
     </Header>
   );

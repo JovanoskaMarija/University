@@ -1,15 +1,21 @@
 import styled from "styled-components";
 
+export const Container = styled.div`
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: space-between;
+`;
+
 export const Filter = styled.div`
-  width: 96%;
   display: flex;
   flex-direction: row;
-  justify-content: center;
+  justify-content: flex-start;
   align-content: center;
   align-items: center;
   flex-wrap: wrap;
   box-sizing: border-box;
-  padding: 10px 10px 0 10px;
+  padding: 10px;
+ 
 `;
 
 export const Separator = styled.div`
@@ -17,8 +23,7 @@ export const Separator = styled.div`
 `;
 
 export const ToggleFilters = styled.div`
-  display: flex;
-  justify-content: flex-end;
-  align-content: center;
-  padding: 10px 10px 0 10px;
+  
+  padding: 10px ;
+  margin: 10px
 `;

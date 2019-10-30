@@ -9,7 +9,7 @@ import {u1F3B8} from 'react-icons-kit/noto_emoji_regular/u1F3B8'
 import {menu4} from 'react-icons-kit/icomoon/menu4'
 
 const IconContainer = 
-withBaseIcon({ size: "100%", style:{width: 40, height: 40} })
+withBaseIcon({ size: "100%", style:{width: 40, height: 40, color: "rgba(5,61,87,0.8)"} })
 
 export const IconPaw = () => <IconContainer icon={paw} />
 export const IconAdd = () => <IconContainer icon={plusCircle} />

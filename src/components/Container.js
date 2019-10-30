@@ -8,7 +8,13 @@ import SubjectsContainer from "./SubjectsContainer";
 import styled from "styled-components";
 import subjectlist from "../data/subjectsList";
 
-const MainContainer = styled.div``;
+import "primereact/resources/themes/nova-light/theme.css";
+import "primereact/resources/primereact.min.css";
+import "primeicons/primeicons.css";
+
+const MainContainer = styled.div`
+  background-color:white;
+`;
 
 class Container extends Component {
   constructor(props) {

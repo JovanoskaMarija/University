@@ -13,21 +13,24 @@ import {
 import {
   Item,
   SideColor,
+  Content,
   Header,
+  Description,
   Icons,
   Tooltip
 } from "../styles/SubjectStyle";
 
 const Subject = props => {
+
   return (
     <Item>
       <SideColor isSelected={props.data.isSelected} />
-      <div>
+      <Content>
         <Header isSelected={props.data.isSelected}>
           <h2>{props.data.name} </h2>
           <div>
             <ToggleButton
-              style={{ width: "80px", height: "35px" }}
+              style={{ width: "80px", height: "35px"}}
               name="isSelected"
               onIcon="pi pi-check"
               offIcon="pi pi-times"
@@ -54,12 +57,14 @@ const Subject = props => {
           </div>
         </Header>
 
-        <h4>{props.data.professor}</h4>
+        <h3>{props.data.professor}</h3>
         <div>
-          {props.data.description}
+          <Description>{props.data.description}
           <Link to={`/subjects/${props.data.id}`}>
             <span>Read More</span>
           </Link>
+          </Description>
+         
         </div>
         <Icons>
           <Tooltip>
@@ -95,7 +100,7 @@ const Subject = props => {
             </span>
           </Tooltip>
         </Icons>
-      </div>
+      </Content>
     </Item>
   );
 };

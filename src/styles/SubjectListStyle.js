@@ -1,16 +1,15 @@
 import styled from "styled-components";
 
 export const Container = styled.div`
-  height: calc(74vh );
+  height: calc(100vh - 117.2px );
   overflow-y: scroll;
   margin: auto;
   display: flex;
   justify-content: space-evenly;
   box-sizing: border-box;
-  margin-top: 30px;
+  /* margin-top: 30px; */
   padding: 20px;
-  background-color: rgba(0,0,0,0.02);
-  border-top: 1px solid red;
+  background-color: #F2F1EF;
   overflow-y: scroll;
   overflow-x: hidden;
   &::-webkit-scrollbar-track {

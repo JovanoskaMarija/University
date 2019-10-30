@@ -29,7 +29,11 @@ const SubjectDetails = props => {
     <Details>
       <Header>
         <Link to="/subjects">
-          <Button icon="pi pi-arrow-left" label="Back" />
+          <Button
+            icon="pi pi-arrow-left"
+            label="Back"
+            style={{ color: "#053D57", backgroundColor: "#97BCC7" }}
+          />
         </Link>
         <ToggleButton
           style={{ width: "80px", height: "35px" }}
@@ -46,13 +50,10 @@ const SubjectDetails = props => {
       </Header>
 
       <Title>
-        <h2>
-          {results.name} - {results.professor}
-        </h2>
+        <p>{results.name}<span>{" - "}{results.professor}</span></p>
       </Title>
 
       <Info>
-        {/* <p>Selected : {results.isSelected ? "Selected" : "Not Selected"}</p> */}
         <Tooltip>
           <span data-tooltip="Professor">
             <IconMenu />
