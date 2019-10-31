@@ -1,8 +1,6 @@
 import React, { Component } from "react";
 import { Router } from "@reach/router";
 import Menu from "./Menu.js";
-// import Filters from "./Filters.js";
-// import SubjectList from "./SubjectList.js";
 import SubjectDetails from "./SubjectDetails";
 import SubjectsContainer from "./SubjectsContainer";
 import styled from "styled-components";
