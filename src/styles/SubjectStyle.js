@@ -5,7 +5,7 @@ export const Item = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
-  max-width: 330px;
+  max-width: 300px;
   box-shadow: 2px 2px 4px 3px rgba(177, 177, 177, 0.4);
   border-radius: 6px;
   margin: 20px;
