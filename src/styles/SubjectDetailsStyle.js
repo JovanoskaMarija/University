@@ -1,9 +1,27 @@
 import styled from "styled-components";
 
 export const Details = styled.div`
+height: 92vh;
  box-sizing: border-box;
   display: flex;
   flex-direction: column;
+
+  overflow-y: scroll;
+  overflow-x: hidden;
+  &::-webkit-scrollbar-track {
+    border-radius: 10px;
+    background-color: #f2f2f2;
+  }
+  &::-webkit-scrollbar {
+    width: 12px;
+    background-color: #f5f5f5;
+  }
+  &::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+    background-color: #349cc7;
+  }
+
 `;
 
 export const Header = styled.div`
@@ -65,7 +83,7 @@ export const Description = styled.div`
   text-indent: 40px;
   color: #053d57;
   background-color: #f2f1ef;
-
+  
   @media only screen and (max-width: 600px) {
     margin-left: 0;
     margin-right: 0;
