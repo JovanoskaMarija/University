@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Router } from "@reach/router";
 import Menu from "./Menu.js";
+import HomePage from './HomePage'
 import SubjectDetails from "./SubjectDetails";
 import SubjectsContainer from "./SubjectsContainer";
 import styled from "styled-components";
@@ -162,6 +163,7 @@ class Container extends Component {
       <MainContainer>
         <Menu />
         <Router>
+          <HomePage path="/" />
           <SubjectsContainer
             path="/subjects"
             filteredData={filteredData}
