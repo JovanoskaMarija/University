@@ -7,10 +7,11 @@ import SubjectsContainer from "./SubjectsContainer";
 import styled from "styled-components";
 import subjectlist from "../data/subjectsList";
 // import List from './List'
-// import axios from 'axios';
 import "primereact/resources/themes/nova-light/theme.css";
 import "primereact/resources/primereact.min.css";
 import "primeicons/primeicons.css";
+
+import "../style.css";
 
 const MainContainer = styled.div`
   background-color: white;
@@ -33,30 +34,14 @@ class Container extends Component {
     };
   }
 
-  // componentDidMount() {
-  //   axios.get('http://localhost:5000/subjects/')
-  //     //.then(response => response.json())
-  //     .then(response => {
-  //       console.log(response);
-  //       this.setState({
-  //         subjects: response.data,
-  //       });
-  //     })
-  //     .catch(err => console.log(err));
-  // }
-
-  // componentDidMount() {
-  //   this.setState({ subjects: subjectlist });
-  // }
-
   componentDidMount() {
     fetch("http://localhost:5000/subjects/", { method: "get" })
       .then(res => res.json())
       .then(data => {
-        console.log(data);
+        //console.log(data);
         this.setState({
           subjects: data
-        }, console.log(data));
+        });
       })
       .catch(err => console.log(err));
   }
@@ -68,7 +53,7 @@ class Container extends Component {
 
   handleSelected = subjectID => {
     this.setState(prevState => {
-      console.log(subjectID)
+      console.log(subjectID);
       const oldSubjectList = prevState.subjects;
       const newSubjectList = oldSubjectList.map(subject => {
         if (subject._id === subjectID) {
@@ -87,7 +72,7 @@ class Container extends Component {
     this.setState(prevState => {
       const oldList = prevState.subjects;
       const newList = oldList.map(subject => {
-        if (subject.id === subjectID) {
+        if (subject._id === subjectID) {
           const selectedSubject = subject;
           selectedSubject.isPassed = !subject.isPassed;
           return selectedSubject;
@@ -189,16 +174,6 @@ class Container extends Component {
     return (
       <MainContainer>
         <Menu />
-        {/* <List filteredData={filteredData} /> */}
-        <ul>
-          {this.state.subjects &&
-            this.state.subjects.map(subject => {
-              return (
-                <li key={subject.name}>{subject.isSelected.toString()}</li>
-              );
-            })}
-        </ul>
-
         <Router>
           <HomePage path="/" />
           <SubjectsContainer

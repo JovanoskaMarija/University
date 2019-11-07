@@ -21,9 +21,6 @@ import {
 } from "../styles/SubjectStyle";
 
 const Subject = props => {
-
-  console.log(props.data.isSelected)
-
   return (
     <Item>
       <SideColor isSelected={props.data.isSelected} />
@@ -32,7 +29,7 @@ const Subject = props => {
           <h2>{props.data.name} </h2>
           <div>
             <ToggleButton
-              style={{ width: "80px", height: "35px"}}
+              style={{ width: "80px", height: "35px" }}
               name="isSelected"
               onIcon="pi pi-check"
               offIcon="pi pi-times"
@@ -53,7 +50,7 @@ const Subject = props => {
               offIcon="pi pi-times"
               checked={props.data.isPassed}
               onChange={e => {
-                props.handlePassed(props.data.id);
+                props.handlePassed(props.data._id);
               }}
             />
           </div>
@@ -61,12 +58,12 @@ const Subject = props => {
 
         <h3>{props.data.professor}</h3>
         <div>
-          <Description>{props.data.description}
-          <Link to={`/subjects/${props.data._id}`}>
-            <span>Read More</span>
-          </Link>
+          <Description>
+            {props.data.description}
+            <Link to={`/subjects/${props.data._id}`}>
+              <span>Read More</span>
+            </Link>
           </Description>
-         
         </div>
         <Icons>
           <Tooltip>

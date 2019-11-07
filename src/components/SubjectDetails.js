@@ -22,11 +22,8 @@ import { Tooltip } from "../styles/SubjectStyle";
 
 const SubjectDetails = props => {
   const data = props.data;
-  // const id = parseInt(props.subjectId);
-    const id = parseInt(props.subjectId);
-
+  const id = props.subjectId;
   const results = data.find(subject => subject._id === id);
-
   return (
     <Details>
       <Header>
@@ -44,7 +41,7 @@ const SubjectDetails = props => {
           offIcon="pi pi-times"
           checked={results.isSelected}
           onChange={() => {
-            props.handleSelected(results.id);
+            props.handleSelected(results._id);
           }}
           tooltip="Select"
           tooltipOptions={{ position: "bottom" }}
