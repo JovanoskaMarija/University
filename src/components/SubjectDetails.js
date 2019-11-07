@@ -22,8 +22,10 @@ import { Tooltip } from "../styles/SubjectStyle";
 
 const SubjectDetails = props => {
   const data = props.data;
-  const id = parseInt(props.subjectId);
-  const results = data.find(subject => subject.id === id);
+  // const id = parseInt(props.subjectId);
+    const id = parseInt(props.subjectId);
+
+  const results = data.find(subject => subject._id === id);
 
   return (
     <Details>

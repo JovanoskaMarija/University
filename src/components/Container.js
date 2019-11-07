@@ -1,18 +1,19 @@
 import React, { Component } from "react";
 import { Router } from "@reach/router";
 import Menu from "./Menu.js";
-import HomePage from './HomePage'
+import HomePage from "./HomePage";
 import SubjectDetails from "./SubjectDetails";
 import SubjectsContainer from "./SubjectsContainer";
 import styled from "styled-components";
 import subjectlist from "../data/subjectsList";
-
+// import List from './List'
+// import axios from 'axios';
 import "primereact/resources/themes/nova-light/theme.css";
 import "primereact/resources/primereact.min.css";
 import "primeicons/primeicons.css";
 
 const MainContainer = styled.div`
-  background-color:white;
+  background-color: white;
 `;
 
 class Container extends Component {
@@ -32,6 +33,34 @@ class Container extends Component {
     };
   }
 
+  // componentDidMount() {
+  //   axios.get('http://localhost:5000/subjects/')
+  //     //.then(response => response.json())
+  //     .then(response => {
+  //       console.log(response);
+  //       this.setState({
+  //         subjects: response.data,
+  //       });
+  //     })
+  //     .catch(err => console.log(err));
+  // }
+
+  // componentDidMount() {
+  //   this.setState({ subjects: subjectlist });
+  // }
+
+  componentDidMount() {
+    fetch("http://localhost:5000/subjects/", { method: "get" })
+      .then(res => res.json())
+      .then(data => {
+        console.log(data);
+        this.setState({
+          subjects: data
+        }, console.log(data));
+      })
+      .catch(err => console.log(err));
+  }
+
   onFilterChange = (name, value) => {
     const filterName = "filter" + name[0].toUpperCase() + name.slice(1);
     this.setState({ [filterName]: value });
@@ -39,9 +68,10 @@ class Container extends Component {
 
   handleSelected = subjectID => {
     this.setState(prevState => {
+      console.log(subjectID)
       const oldSubjectList = prevState.subjects;
       const newSubjectList = oldSubjectList.map(subject => {
-        if (subject.id === subjectID) {
+        if (subject._id === subjectID) {
           const newSubject = subject;
           newSubject.isSelected = !subject.isSelected;
           return newSubject;
@@ -131,12 +161,9 @@ class Container extends Component {
     return this.state.filterIsPassed.includes(subject.isPassed);
   };
 
-  componentDidMount() {
-    this.setState({ subjects: subjectlist });
-  }
-
   render() {
-    const data = subjectlist;
+    //const data = subjectlist;
+    const data = this.state.subjects;
 
     const filteredData = data
       .filter(this.filterByProfessor)
@@ -158,10 +185,20 @@ class Container extends Component {
       .filter(this.filterByExam)
       .filter(this.filterBySemester)
       .filter(this.filterByDifficulty)
-      .filter(this.filterByPassed);;
+      .filter(this.filterByPassed);
     return (
       <MainContainer>
         <Menu />
+        {/* <List filteredData={filteredData} /> */}
+        <ul>
+          {this.state.subjects &&
+            this.state.subjects.map(subject => {
+              return (
+                <li key={subject.name}>{subject.isSelected.toString()}</li>
+              );
+            })}
+        </ul>
+
         <Router>
           <HomePage path="/" />
           <SubjectsContainer

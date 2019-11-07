@@ -19,7 +19,8 @@ class Filters extends Component {
     exam: "",
     semester: "",
     difficulty: "",
-    isPassed: false
+    isPassed: false.professor,
+    // displaySubjects: "",
   };
 
   onChecked = () => {
@@ -55,6 +56,11 @@ class Filters extends Component {
     ];
 
     const isPassedOptions = [{ label: "Passed", value: true }];
+
+    // const displaySubjectsOptions = [
+    //   { label: "List", value: "list" },
+    //   { label: "Cards", value: "cards" }
+    // ];
 
     return (
       <Container>
@@ -264,6 +270,16 @@ class Filters extends Component {
                 />
               </OverlayPanel>
             </Separator>
+
+            {/* <SelectButton
+              value={this.state.displaySubjects}
+              multiple={true}
+              options={displaySubjectsOptions}
+              name="displaySubjects"
+              onChange={this.handleChange}
+              tooltip="Passed"
+              tooltipOptions={{ position: "bottom" }}
+            /> */}
           </Filter>
         )}
       </Container>

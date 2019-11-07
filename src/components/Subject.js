@@ -22,6 +22,8 @@ import {
 
 const Subject = props => {
 
+  console.log(props.data.isSelected)
+
   return (
     <Item>
       <SideColor isSelected={props.data.isSelected} />
@@ -37,7 +39,7 @@ const Subject = props => {
               //because checkbox is uncontrolled we set default checked value to be equal to the value assigned in the mock
               checked={props.data.isSelected}
               onChange={e => {
-                props.handleSelected(props.data.id);
+                props.handleSelected(props.data._id);
               }}
               tooltip="Select"
               tooltipOptions={{ position: "bottom" }}
@@ -60,7 +62,7 @@ const Subject = props => {
         <h3>{props.data.professor}</h3>
         <div>
           <Description>{props.data.description}
-          <Link to={`/subjects/${props.data.id}`}>
+          <Link to={`/subjects/${props.data._id}`}>
             <span>Read More</span>
           </Link>
           </Description>

@@ -2,16 +2,16 @@ import React from "react";
 import { Container, List } from "../styles/SubjectListStyle";
 import Subject from "./Subject.js";
 
-class SubjectList extends React.Component {
-  render() {
-    const { filteredData, handleSelected, handlePassed } = this.props;
+const SubjectList = props => {
+  
+    const { filteredData, handleSelected, handlePassed } = props;
     return (
       <Container>
         <List>
           {filteredData.map(subject => {
             return (
               <Subject
-                key={subject.id}
+                key={subject.name}
                 data={subject}
                 handleSelected={handleSelected}
                 handlePassed={handlePassed}
@@ -22,6 +22,5 @@ class SubjectList extends React.Component {
       </Container>
     );
   }
-}
 
 export default SubjectList;
