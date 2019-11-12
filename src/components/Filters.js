@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { useState } from "react";
 import {
   Container,
   Filter,
@@ -11,280 +11,263 @@ import { ToggleButton } from "primereact/togglebutton";
 import { Button } from "primereact/button";
 import { OverlayPanel } from "primereact/overlaypanel";
 
-class Filters extends Component {
-  state = {
-    isChecked: false,
+const Filters = props => {
+  const [showFilters, setShowFilters] = useState(false);
+  const [filters, setFilters] = useState({
     professor: "",
     program: "",
     exam: "",
     semester: "",
     difficulty: "",
-    isPassed: false.professor,
-    // displaySubjects: "",
+    isPassed: false
+  });
+
+  const onShowFilters = () => {
+    setShowFilters(!showFilters);
   };
 
-  onChecked = () => {
-    this.setState({ isChecked: !this.state.isChecked });
-  };
-
-  handleChange = e => {
+  const handleChange = e => {
     const { name, value } = e.target;
-    this.setState({ [name]: value });
-    this.props.onFilterChange(name, value);
+    setFilters({ ...filters, [name]: value });
+    props.onFilterChange(name, value);
   };
 
-  render() {
-    const programOptions = [
-      { label: "New", value: "new" },
-      { label: "Old", value: "old" }
-    ];
+  const programOptions = [
+    { label: "New", value: "new" },
+    { label: "Old", value: "old" }
+  ];
 
-    const examOptions = [
-      { label: "Exam", value: "exam" },
-      { label: "Midterms", value: "midterms" }
-    ];
+  const examOptions = [
+    { label: "Exam", value: "exam" },
+    { label: "Midterms", value: "midterms" }
+  ];
 
-    const semesterOptions = [
-      { label: "Winter", value: "winter" },
-      { label: "Summer", value: "summer" }
-    ];
+  const semesterOptions = [
+    { label: "Winter", value: "winter" },
+    { label: "Summer", value: "summer" }
+  ];
 
-    const difficultyOptions = [
-      { label: "Easy", value: "easy" },
-      { label: "Medium", value: "medium" },
-      { label: "Difficult", value: "difficult" }
-    ];
+  const difficultyOptions = [
+    { label: "Easy", value: "easy" },
+    { label: "Medium", value: "medium" },
+    { label: "Difficult", value: "difficult" }
+  ];
 
-    const isPassedOptions = [{ label: "Passed", value: true }];
+  const isPassedOptions = [{ label: "Passed", value: true }];
 
-    // const displaySubjectsOptions = [
-    //   { label: "List", value: "list" },
-    //   { label: "Cards", value: "cards" }
-    // ];
+  return (
+    <Container>
+      <ToggleFilters>
+        <ToggleButton
+          style={{ width: "120px" }}
+          onLabel="Show Filters"
+          offLabel="Hide Filters"
+          checked={!showFilters}
+          onChange={onShowFilters}
+        />
+      </ToggleFilters>
 
-    return (
-      <Container>
-        <ToggleFilters>
-          <ToggleButton
-            style={{ width: "120px" }}
-            onLabel="Show Filters"
-            offLabel="Hide Filters"
-            checked={!this.state.isChecked}
-            onChange={this.onChecked}
-          />
-        </ToggleFilters>
-
-        {this.state.isChecked && (
-          <Filter>
-            <Separator>
-              <Button
-                type="button"
-                label="Professor"
-                onClick={e => this.professorOverlayPanel.toggle(e)}
+      {showFilters && (
+        <Filter>
+          <Separator>
+            <Button
+              type="button"
+              label="Professor"
+              onClick={e => filters.professorOverlayPanel.toggle(e)}
+            />
+            <OverlayPanel
+              style={{ backgroundColor: "#F2F1EF" }}
+              ref={el => (filters.professorOverlayPanel = el)}
+            >
+              <p>Enter Professor:</p>
+              <InputText
+                id="float-input"
+                type="text"
+                size="30"
+                name="professor"
+                value={props.filterProfessor}
+                onChange={handleChange}
+                tooltip="Professor"
+                tooltipOptions={{ position: "bottom" }}
               />
-              <OverlayPanel
-                style={{ backgroundColor: "#F2F1EF" }}
-                ref={el => (this.professorOverlayPanel = el)}
-              >
-                <p>Enter Professor:</p>
-                <InputText
-                  id="float-input"
-                  type="text"
-                  size="30"
-                  name="professor"
-                  value={this.props.filterProfessor}
-                  onChange={this.handleChange}
-                  tooltip="Professor"
-                  tooltipOptions={{ position: "bottom" }}
-                />
-              </OverlayPanel>
-            </Separator>
+            </OverlayPanel>
+          </Separator>
 
-            <Separator>
-              <Button
-                type="button"
-                label="Subject Name"
-                onClick={e => this.nameOverlayPanel.toggle(e)}
+          <Separator>
+            <Button
+              type="button"
+              label="Subject Name"
+              onClick={e => filters.nameOverlayPanel.toggle(e)}
+            />
+            <OverlayPanel
+              style={{ backgroundColor: "#F2F1EF" }}
+              ref={el => (filters.nameOverlayPanel = el)}
+            >
+              <p>Enter Subject Name:</p>
+              <InputText
+                id="float-input"
+                type="text"
+                size="30"
+                name="name"
+                value={props.filterName}
+                onChange={handleChange}
+                tooltip="Name"
+                tooltipOptions={{ position: "bottom" }}
               />
-              <OverlayPanel
-                style={{ backgroundColor: "#F2F1EF" }}
-                ref={el => (this.nameOverlayPanel = el)}
-              >
-                <p>Enter Subject Name:</p>
-                <InputText
-                  id="float-input"
-                  type="text"
-                  size="30"
-                  name="name"
-                  value={this.props.filterName}
-                  onChange={this.handleChange}
-                  tooltip="Name"
-                  tooltipOptions={{ position: "bottom" }}
-                />
-              </OverlayPanel>
-            </Separator>
+            </OverlayPanel>
+          </Separator>
 
-            <Separator>
-              <Button
-                type="button"
-                label="Faculty"
-                onClick={e => this.facultyOverlayPanel.toggle(e)}
+          <Separator>
+            <Button
+              type="button"
+              label="Faculty"
+              onClick={e => filters.facultyOverlayPanel.toggle(e)}
+            />
+            <OverlayPanel
+              style={{ backgroundColor: "#F2F1EF" }}
+              ref={el => (filters.facultyOverlayPanel = el)}
+            >
+              <p>Enter Faculty:</p>
+              <InputText
+                id="float-input"
+                type="text"
+                size="30"
+                name="faculty"
+                value={props.filterFaculty}
+                onChange={handleChange}
+                tooltip="Faculty"
+                tooltipOptions={{ position: "bottom" }}
               />
-              <OverlayPanel
-                style={{ backgroundColor: "#F2F1EF" }}
-                ref={el => (this.facultyOverlayPanel = el)}
-              >
-                <p>Enter Faculty:</p>
-                <InputText
-                  id="float-input"
-                  type="text"
-                  size="30"
-                  name="faculty"
-                  value={this.props.filterFaculty}
-                  onChange={this.handleChange}
-                  tooltip="Faculty"
-                  tooltipOptions={{ position: "bottom" }}
-                />
-              </OverlayPanel>
-            </Separator>
+            </OverlayPanel>
+          </Separator>
 
-            <Separator>
-              <Button
-                type="button"
-                label="Program"
-                onClick={e => this.programOverlayPanel.toggle(e)}
+          <Separator>
+            <Button
+              type="button"
+              label="Program"
+              onClick={e => filters.programOverlayPanel.toggle(e)}
+            />
+            <OverlayPanel
+              style={{ backgroundColor: "#F2F1EF" }}
+              ref={el => (filters.programOverlayPanel = el)}
+            >
+              <p>Choose Program: </p>
+              <SelectButton
+                value={filters.program}
+                multiple={true}
+                options={programOptions}
+                name="program"
+                onChange={handleChange}
+                tooltip="Program"
+                tooltipOptions={{ position: "bottom" }}
               />
-              <OverlayPanel
-                style={{ backgroundColor: "#F2F1EF" }}
-                ref={el => (this.programOverlayPanel = el)}
-              >
-                <p>Choose Program: </p>
-                <SelectButton
-                  value={this.state.program}
-                  multiple={true}
-                  options={programOptions}
-                  name="program"
-                  onChange={this.handleChange}
-                  tooltip="Program"
-                  tooltipOptions={{ position: "bottom" }}
-                />
-              </OverlayPanel>
-            </Separator>
+            </OverlayPanel>
+          </Separator>
 
-            <Separator>
-              <Button
-                type="button"
-                label="Exam"
-                onClick={e => {
-                  this.examOverlayPanel.toggle(e);
-                }}
+          <Separator>
+            <Button
+              type="button"
+              label="Exam"
+              onClick={e => {
+                filters.examOverlayPanel.toggle(e);
+              }}
+            />
+            <OverlayPanel
+              style={{ backgroundColor: "#F2F1EF" }}
+              ref={el => (filters.examOverlayPanel = el)}
+            >
+              <p>Choose Exam Options:</p>
+              <SelectButton
+                value={filters.exam}
+                multiple={true}
+                options={examOptions}
+                name="exam"
+                onChange={handleChange}
+                tooltip="Exam"
+                tooltipOptions={{ position: "bottom" }}
               />
-              <OverlayPanel
-                style={{ backgroundColor: "#F2F1EF" }}
-                ref={el => (this.examOverlayPanel = el)}
-              >
-                <p>Choose Exam Options:</p>
-                <SelectButton
-                  value={this.state.exam}
-                  multiple={true}
-                  options={examOptions}
-                  name="exam"
-                  onChange={this.handleChange}
-                  tooltip="Exam"
-                  tooltipOptions={{ position: "bottom" }}
-                />
-              </OverlayPanel>
-            </Separator>
+            </OverlayPanel>
+          </Separator>
 
-            <Separator>
-              <Button
-                type="button"
-                label="Difficulty"
-                onClick={e => {
-                  this.difficultyOverlayPanel.toggle(e);
-                }}
+          <Separator>
+            <Button
+              type="button"
+              label="Difficulty"
+              onClick={e => {
+                filters.difficultyOverlayPanel.toggle(e);
+              }}
+            />
+            <OverlayPanel
+              style={{ backgroundColor: "#F2F1EF" }}
+              ref={el => (filters.difficultyOverlayPanel = el)}
+            >
+              <p>Choose Difficulty:</p>
+              <SelectButton
+                value={filters.difficulty}
+                multiple={true}
+                options={difficultyOptions}
+                name="difficulty"
+                onChange={handleChange}
+                tooltip="Difficulty"
+                tooltipOptions={{ position: "bottom" }}
               />
-              <OverlayPanel
-                style={{ backgroundColor: "#F2F1EF" }}
-                ref={el => (this.difficultyOverlayPanel = el)}
-              >
-                <p>Choose Difficulty:</p>
-                <SelectButton
-                  value={this.state.difficulty}
-                  multiple={true}
-                  options={difficultyOptions}
-                  name="difficulty"
-                  onChange={this.handleChange}
-                  tooltip="Difficulty"
-                  tooltipOptions={{ position: "bottom" }}
-                />
-              </OverlayPanel>
-            </Separator>
+            </OverlayPanel>
+          </Separator>
 
-            <Separator>
-              <Button
-                type="button"
-                label="Semester"
-                onClick={e => {
-                  this.semesterOverlayPanel.toggle(e);
-                }}
+          <Separator>
+            <Button
+              type="button"
+              label="Semester"
+              onClick={e => {
+                filters.semesterOverlayPanel.toggle(e);
+              }}
+            />
+            <OverlayPanel
+              style={{ backgroundColor: "#F2F1EF" }}
+              ref={el => (filters.semesterOverlayPanel = el)}
+            >
+              <p>Choose Semester:</p>
+              <SelectButton
+                value={filters.semester}
+                multiple={true}
+                options={semesterOptions}
+                name="semester"
+                onChange={handleChange}
+                tooltip="Semester"
+                tooltipOptions={{ position: "bottom" }}
               />
-              <OverlayPanel
-                style={{ backgroundColor: "#F2F1EF" }}
-                ref={el => (this.semesterOverlayPanel = el)}
-              >
-                <p>Choose Semester:</p>
-                <SelectButton
-                  value={this.state.semester}
-                  multiple={true}
-                  options={semesterOptions}
-                  name="semester"
-                  onChange={this.handleChange}
-                  tooltip="Semester"
-                  tooltipOptions={{ position: "bottom" }}
-                />
-              </OverlayPanel>
-            </Separator>
+            </OverlayPanel>
+          </Separator>
 
-            <Separator>
-              <Button
-                type="button"
-                label="Passed"
-                onClick={e => {
-                  this.passedOverlayPanel.toggle(e);
-                }}
+          <Separator>
+            <Button
+              type="button"
+              label="Passed"
+              onClick={e => {
+                filters.passedOverlayPanel.toggle(e);
+              }}
+            />
+            <OverlayPanel
+              style={{ backgroundColor: "#F2F1EF" }}
+              ref={el => (filters.passedOverlayPanel = el)}
+            >
+              <p>Choose Passed Subjects:</p>
+              <SelectButton
+                value={filters.isPassed}
+                multiple={true}
+                options={isPassedOptions}
+                name="isPassed"
+                onChange={handleChange}
+                tooltip="Passed"
+                tooltipOptions={{ position: "bottom" }}
               />
-              <OverlayPanel
-                style={{ backgroundColor: "#F2F1EF" }}
-                ref={el => (this.passedOverlayPanel = el)}
-              >
-                <p>Choose Passed Subjects:</p>
-                <SelectButton
-                  value={this.state.isPassed}
-                  multiple={true}
-                  options={isPassedOptions}
-                  name="isPassed"
-                  onChange={this.handleChange}
-                  tooltip="Passed"
-                  tooltipOptions={{ position: "bottom" }}
-                />
-              </OverlayPanel>
-            </Separator>
-
-            {/* <SelectButton
-              value={this.state.displaySubjects}
-              multiple={true}
-              options={displaySubjectsOptions}
-              name="displaySubjects"
-              onChange={this.handleChange}
-              tooltip="Passed"
-              tooltipOptions={{ position: "bottom" }}
-            /> */}
-          </Filter>
-        )}
-      </Container>
-    );
-  }
-}
+            </OverlayPanel>
+          </Separator>
+        </Filter>
+      )}
+    </Container>
+  );
+  // }
+};
 
 export default Filters;
