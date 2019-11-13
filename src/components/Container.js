@@ -15,7 +15,7 @@ const MainContainer = styled.div`
   background-color: white;
 `;
 
-const Container = (props) => {
+const Container = () => {
   const [subjects, setSubjects] = useState([]);
   const [filters, setFilters] = useState({
     filterProfessor: "",
@@ -28,11 +28,12 @@ const Container = (props) => {
     filterIsSelected: [],
     filterIsPassed: []
   });
+  const [sortedBy, setSortedBy] = useState("default");
 
   useEffect(() => {
     fetch("http://localhost:5000/subjects/", { method: "get" })
       .then(res => res.json())
-      .then(data => setSubjects([...subjects, data]))
+      .then(data => setSubjects(data))
       .catch(err => console.log(err));
   }, []);
 
@@ -54,22 +55,56 @@ const Container = (props) => {
     setSubjects(newSelectedList);
   };
 
-  useEffect(() => {
-    console.log("Subjects", subjects);
-  }, [subjects]);
-
   const handlePassed = subjectID => {
     const newPassedList = subjects.map(subject => {
-      if(subject._id === subjectID) {
-        const passedSubject = subject;
-        passedSubject.isPassed = !subject.isPassed;
-        return passedSubject;
+      if (subject._id === subjectID) {
+        const newSubject = subject;
+        newSubject.isPassed = !subject.isPassed;
+        return newSubject;
       } else {
-        return subject
+        return subject;
       }
     });
-    setSubjects(newPassedList)
-}
+    setSubjects(newPassedList);
+  };
+
+  const sortByName = value => {
+    console.log(value);
+    let sortedSubjects;
+    if (value === sortedBy) {
+      console.log("isti");
+      return;
+    }
+
+    if (value === "a-z") {
+      console.log("Pred a-z sortiranje", subjects);
+      sortedSubjects = [...subjects].sort((a, b) => {
+        if (a.name < b.name) return -1;
+        else if (a.name > b.name) return 1;
+        return 0;
+      });
+      console.log("Posle a-z sortiranje:", sortedSubjects);
+    } else if (value === "z-a") {
+      console.log("Pred z-a sortiranje", subjects);
+      sortedSubjects = [...subjects].sort((a, b) => {
+        if (a.name > b.name) return -1;
+        else if (a.name < b.name) return 1;
+        return 0;
+      });
+      console.log("Posle z-a sortiranje:", sortedSubjects);
+    }
+    if (value === "default") {
+      console.log("Vo default sortiranje", subjects);
+      sortedSubjects = [...subjects].sort((a, b) => {
+        if (a._id < b._id) return -1;
+        else if (a._id > b._id) return 1;
+        return 0;
+      });
+    }
+    setSubjects(sortedSubjects);
+    setSortedBy(value);
+    return sortedSubjects;
+  };
 
   const filterByProfessor = subject => {
     return subject.professor
@@ -78,15 +113,11 @@ const Container = (props) => {
   };
 
   const filterByName = subject => {
-    return subject.name
-      .toLowerCase()
-      .includes(filters.filterName.toLowerCase());
+    return subject.name.toLowerCase().includes(filters.filterName.toLowerCase());
   };
 
   const filterByFaculty = subject => {
-    return subject.faculty
-      .toLowerCase()
-      .includes(filters.filterFaculty.toLowerCase());
+    return subject.faculty.toLowerCase().includes(filters.filterFaculty.toLowerCase());
   };
 
   const filterByProgram = subject => {
@@ -133,34 +164,30 @@ const Container = (props) => {
     return filters.filterIsPassed.includes(subject.isPassed);
   };
 
-  //const data = subjectlist;
   const data = subjects;
 
-  useEffect(() => {
-    console.log("Data:",data)
-  })
-
   const filteredData = data
-  .filter(filterByProfessor)
-  .filter(filterByName)
-  .filter(filterByFaculty)
-  .filter(filterByProgram)
-  .filter(filterByExam)
-  .filter(filterBySemester)
-  .filter(filterByDifficulty)
-  .filter(filterBySelected)
-  .filter(filterByPassed);
+    .filter(filterByProfessor)
+    .filter(filterByName)
+    .filter(filterByFaculty)
+    .filter(filterByProgram)
+    .filter(filterByExam)
+    .filter(filterBySemester)
+    .filter(filterByDifficulty)
+    .filter(filterBySelected)
+    .filter(filterByPassed);
 
   const filterSelected = data
-  .filter(subject => subject.isSelected)
-  .filter(filterByProfessor)
-  .filter(filterByName)
-  .filter(filterByFaculty)
-  .filter(filterByProgram)
-  .filter(filterByExam)
-  .filter(filterBySemester)
-  .filter(filterByDifficulty)
-  .filter(filterByPassed);
+    .filter(subject => subject.isSelected)
+    .filter(filterByProfessor)
+    .filter(filterByName)
+    .filter(filterByFaculty)
+    .filter(filterByProgram)
+    .filter(filterByExam)
+    .filter(filterBySemester)
+    .filter(filterByDifficulty)
+    .filter(filterByPassed)
+    .filter(sortByName);
   return (
     <MainContainer>
       <Menu />
@@ -175,9 +202,11 @@ const Container = (props) => {
           filterProgram={filters.filterProgram}
           filterIsSelected={filters.filterIsSelected}
           filterIsPassed={filters.IsPassed}
+          sortName={sortedBy}
           onFilterChange={onFilterChange}
           handleSelected={handleSelected}
           handlePassed={handlePassed}
+          sortByName={sortByName}
         />
         <SubjectsContainer
           path="/selected"
@@ -188,9 +217,11 @@ const Container = (props) => {
           filterProgram={filters.filterProgram}
           filterIsSelected={filters.filterIsSelected}
           filterIsPassed={filters.IsPassed}
+          sortName={sortedBy}
           onFilterChange={onFilterChange}
           handleSelected={handleSelected}
           handlePassed={handlePassed}
+          sortByName={sortByName}
         />
         <SubjectDetails
           data={data}

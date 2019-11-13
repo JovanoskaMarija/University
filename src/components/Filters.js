@@ -19,8 +19,11 @@ const Filters = props => {
     exam: "",
     semester: "",
     difficulty: "",
-    isPassed: false
+    isPassed: false,
+  
   });
+
+  const [sortedBy,setSortedBy] =useState('')
 
   const onShowFilters = () => {
     setShowFilters(!showFilters);
@@ -31,6 +34,20 @@ const Filters = props => {
     setFilters({ ...filters, [name]: value });
     props.onFilterChange(name, value);
   };
+
+  const handleSortByName = (e) =>{
+    const {value } = e.target;
+    console.log('value in filter ',value)
+    if(value === null){
+      console.log('value in nullll ');
+      props.sortByName('default');
+      setSortedBy('default')
+      return;
+    } 
+    props.sortByName(value);
+    setSortedBy(value)
+
+  }
 
   const programOptions = [
     { label: "New", value: "new" },
@@ -54,6 +71,12 @@ const Filters = props => {
   ];
 
   const isPassedOptions = [{ label: "Passed", value: true }];
+
+  const sortByNameOptions = [
+    { label: "A-Z", value:'a-z' },
+    { label: "Z-A", value:'z-a' },
+   // { label: "Default", value:'default' },
+  ];
 
   return (
     <Container>
@@ -259,6 +282,29 @@ const Filters = props => {
                 name="isPassed"
                 onChange={handleChange}
                 tooltip="Passed"
+                tooltipOptions={{ position: "bottom" }}
+              />
+            </OverlayPanel>
+          </Separator>
+          <Separator>
+            <Button
+              type="button"
+              label="Sort By Name"
+              onClick={e => {
+                filters.sortByNameOverlayPanel.toggle(e);
+              }}
+            />
+            <OverlayPanel
+              style={{ backgroundColor: "#F2F1EF" }}
+              ref={el => (filters.sortByNameOverlayPanel = el)}
+            >
+              <p>Sort By Name:</p>
+              <SelectButton
+                value={sortedBy}
+                options={sortByNameOptions}
+                name="sortByName"
+                onChange={handleSortByName}
+                tooltip="Sort By Name"
                 tooltipOptions={{ position: "bottom" }}
               />
             </OverlayPanel>
