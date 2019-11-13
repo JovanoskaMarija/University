@@ -1,6 +1,8 @@
 import React from "react";
 import { ToggleButton } from "primereact/togglebutton";
 import { Link } from "@reach/router";
+import { Button } from "primereact/button";
+import { OverlayPanel } from "primereact/overlaypanel";
 import {
   IconPaw,
   IconTshirt,
@@ -26,13 +28,24 @@ const Subject = props => {
       <SideColor isSelected={props.data.isSelected} />
       <Content>
         <Header isSelected={props.data.isSelected}>
-          <h2>{props.data.name} </h2>
+          <h4>{props.data.name} </h4>
           <div>
+            {/* <Button
+              icon="pi pi-ellipsis-h"
+              style={{
+                backgroundColor: "transparent",
+                borderColor: "transparent"
+              }}
+              onClick={e => this.op.toggle(e)}
+            /> */}
             <ToggleButton
-              style={{ width: "80px", height: "35px" }}
+              // style={{ width: "160px", height: "30px" }}
+              style={{ width: "80px", height: "30px" }}
               name="isSelected"
               onIcon="pi pi-check"
               offIcon="pi pi-times"
+              // onLabel="Unselect Subject"
+              // offLabel="Select Subject"
               //because checkbox is uncontrolled we set default checked value to be equal to the value assigned in the mock
               checked={props.data.isSelected}
               onChange={e => {
@@ -44,19 +57,51 @@ const Subject = props => {
             <ToggleButton
               tooltip="Passed"
               tooltipOptions={{ position: "bottom" }}
-              style={{ width: "80px", height: "35px" }}
+              // style={{ width: "160px", height: "30px" }}
+              style={{ width: "80px", height: "30px" }}
               name="passed"
               onIcon="pi pi-check"
               offIcon="pi pi-times"
+              // onLabel="Unmark as passed"
+              // offLabel="Mark as passed"
               checked={props.data.isPassed}
               onChange={e => {
                 props.handlePassed(props.data._id);
               }}
             />
+            {/* <ToggleButton
+              style={{ width: "160px", height: "30px" }}
+              name="isSelected"
+              onIcon="pi pi-check"
+              offIcon="pi pi-times"
+              onLabel="Unselect Subject"
+              offLabel="Select Subject"
+              //because checkbox is uncontrolled we set default checked value to be equal to the value assigned in the mock
+              checked={props.data.isSelected}
+              onChange={e => {
+                props.handleSelected(props.data._id);
+              }}
+              tooltip="Select"
+              tooltipOptions={{ position: "bottom" }}
+            />
+            <ToggleButton
+              tooltip="Passed"
+              tooltipOptions={{ position: "bottom" }}
+              style={{ width: "160px", height: "30px" }}
+              name="passed"
+              onIcon="pi pi-check"
+              offIcon="pi pi-times"
+              onLabel="Unmark as passed"
+              offLabel="Mark as passed"
+              checked={props.data.isPassed}
+              onChange={e => {
+                props.handlePassed(props.data._id);
+              }}
+            /> */}
           </div>
         </Header>
-
-        <h3>{props.data.professor}</h3>
+        {/* 
+        <h3>{props.data.professor}</h3> */}
         <div>
           <Description>
             {props.data.description}
@@ -81,13 +126,14 @@ const Subject = props => {
               <IconHamburger />
             </span>
           </Tooltip>
-        </Icons>
-        <Icons>
           <Tooltip>
             <span data-tooltip="Program">
               <IconPaw />
             </span>
           </Tooltip>
+        </Icons>
+        {/* <Icons>
+          
           <Tooltip>
             <span data-tooltip="Projects">
               <IconTshirt />
@@ -98,7 +144,7 @@ const Subject = props => {
               <IconCafe />
             </span>
           </Tooltip>
-        </Icons>
+        </Icons> */}
       </Content>
     </Item>
   );

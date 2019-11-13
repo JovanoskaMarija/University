@@ -39,7 +39,7 @@ export const Header = styled.div`
   display: flex;
   justify-content: space-between;
   align-content: center;
-  h2 {
+  h4 {
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -55,19 +55,20 @@ export const Header = styled.div`
       };
   }
   div {
-    margin-right: -7px;
+    /* margin-right: -7px; */
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
     align-items: center;
     align-content: center;
+    padding-right: 10px;
   }
 `;
 
 export const Description = styled.div`
   text-indent: 30px;
   margin-top: 0;
-  padding: 0 20px 0 10px;
+  padding: 0 20px 10px 10px;
   text-align: justify;
   color: rgba(5, 61, 87, 0.7);
   span{

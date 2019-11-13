@@ -16,6 +16,7 @@ const SubjectsContainer = props => {
         filterIsSelected={props.filterIsSelected}
         filterIsPassed={props.IsPassed}
         onFilterChange={props.onFilterChange}
+        sortByName={props.sortByName}
       />
       <Router>
         <SubjectList
