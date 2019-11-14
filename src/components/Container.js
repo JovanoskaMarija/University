@@ -68,33 +68,40 @@ const Container = () => {
     setSubjects(newPassedList);
   };
 
-  const sortByName = value => {
-    console.log(value);
+  const sortBy = value => {
     let sortedSubjects;
     if (value === sortedBy) {
-      console.log("isti");
       return;
     }
-
     if (value === "a-z") {
-      console.log("Pred a-z sortiranje", subjects);
       sortedSubjects = [...subjects].sort((a, b) => {
         if (a.name < b.name) return -1;
         else if (a.name > b.name) return 1;
         return 0;
       });
-      console.log("Posle a-z sortiranje:", sortedSubjects);
     } else if (value === "z-a") {
-      console.log("Pred z-a sortiranje", subjects);
       sortedSubjects = [...subjects].sort((a, b) => {
         if (a.name > b.name) return -1;
         else if (a.name < b.name) return 1;
         return 0;
       });
-      console.log("Posle z-a sortiranje:", sortedSubjects);
     }
+
+    if (value === "easies-first") {
+      sortedSubjects = [...subjects].sort((a, b) => {
+        if (parseInt(a.difficulty) < parseInt(b.difficulty)) return -1;
+        else if (parseInt(a.difficulty) > parseInt(b.difficulty)) return 1;
+        return 0;
+      });
+    }else if(value==="hardest-first"){
+      sortedSubjects = [...subjects].sort((a,b) => {
+        if(parseInt(a.difficulty) > parseInt(b.difficulty)) return -1;
+        else if(parseInt(a.difficulty) < parseInt(b.difficulty)) return 1
+        return 0
+      })
+    }
+
     if (value === "default") {
-      console.log("Vo default sortiranje", subjects);
       sortedSubjects = [...subjects].sort((a, b) => {
         if (a._id < b._id) return -1;
         else if (a._id > b._id) return 1;
@@ -113,11 +120,15 @@ const Container = () => {
   };
 
   const filterByName = subject => {
-    return subject.name.toLowerCase().includes(filters.filterName.toLowerCase());
+    return subject.name
+      .toLowerCase()
+      .includes(filters.filterName.toLowerCase());
   };
 
   const filterByFaculty = subject => {
-    return subject.faculty.toLowerCase().includes(filters.filterFaculty.toLowerCase());
+    return subject.faculty
+      .toLowerCase()
+      .includes(filters.filterFaculty.toLowerCase());
   };
 
   const filterByProgram = subject => {
@@ -186,8 +197,7 @@ const Container = () => {
     .filter(filterByExam)
     .filter(filterBySemester)
     .filter(filterByDifficulty)
-    .filter(filterByPassed)
-    .filter(sortByName);
+    .filter(filterByPassed);
   return (
     <MainContainer>
       <Menu />
@@ -202,11 +212,10 @@ const Container = () => {
           filterProgram={filters.filterProgram}
           filterIsSelected={filters.filterIsSelected}
           filterIsPassed={filters.IsPassed}
-          sortName={sortedBy}
           onFilterChange={onFilterChange}
           handleSelected={handleSelected}
           handlePassed={handlePassed}
-          sortByName={sortByName}
+          sortBy={sortBy}
         />
         <SubjectsContainer
           path="/selected"
@@ -217,11 +226,10 @@ const Container = () => {
           filterProgram={filters.filterProgram}
           filterIsSelected={filters.filterIsSelected}
           filterIsPassed={filters.IsPassed}
-          sortName={sortedBy}
           onFilterChange={onFilterChange}
           handleSelected={handleSelected}
           handlePassed={handlePassed}
-          sortByName={sortByName}
+          sortBy={sortBy}
         />
         <SubjectDetails
           data={data}

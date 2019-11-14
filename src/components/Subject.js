@@ -103,6 +103,7 @@ const Subject = props => {
         {/* 
         <h3>{props.data.professor}</h3> */}
         <div>
+          {props.data.difficulty}
           <Description>
             {props.data.description}
             <Link to={`/subjects/${props.data._id}`}>
