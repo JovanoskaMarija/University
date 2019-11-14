@@ -69,41 +69,14 @@ const Subject = props => {
                 props.handlePassed(props.data._id);
               }}
             />
-            {/* <ToggleButton
-              style={{ width: "160px", height: "30px" }}
-              name="isSelected"
-              onIcon="pi pi-check"
-              offIcon="pi pi-times"
-              onLabel="Unselect Subject"
-              offLabel="Select Subject"
-              //because checkbox is uncontrolled we set default checked value to be equal to the value assigned in the mock
-              checked={props.data.isSelected}
-              onChange={e => {
-                props.handleSelected(props.data._id);
-              }}
-              tooltip="Select"
-              tooltipOptions={{ position: "bottom" }}
-            />
-            <ToggleButton
-              tooltip="Passed"
-              tooltipOptions={{ position: "bottom" }}
-              style={{ width: "160px", height: "30px" }}
-              name="passed"
-              onIcon="pi pi-check"
-              offIcon="pi pi-times"
-              onLabel="Unmark as passed"
-              offLabel="Mark as passed"
-              checked={props.data.isPassed}
-              onChange={e => {
-                props.handlePassed(props.data._id);
-              }}
-            /> */}
+            
           </div>
         </Header>
         {/* 
         <h3>{props.data.professor}</h3> */}
         <div>
-          {props.data.difficulty}
+          Semester: {props.data.semester}<br/>
+          Diff:{props.data.difficulty}
           <Description>
             {props.data.description}
             <Link to={`/subjects/${props.data._id}`}>

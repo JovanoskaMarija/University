@@ -79,7 +79,8 @@ const Container = () => {
         else if (a.name > b.name) return 1;
         return 0;
       });
-    } else if (value === "z-a") {
+    }
+    if (value === "z-a") {
       sortedSubjects = [...subjects].sort((a, b) => {
         if (a.name > b.name) return -1;
         else if (a.name < b.name) return 1;
@@ -93,12 +94,21 @@ const Container = () => {
         else if (parseInt(a.difficulty) > parseInt(b.difficulty)) return 1;
         return 0;
       });
-    }else if(value==="hardest-first"){
-      sortedSubjects = [...subjects].sort((a,b) => {
-        if(parseInt(a.difficulty) > parseInt(b.difficulty)) return -1;
-        else if(parseInt(a.difficulty) < parseInt(b.difficulty)) return 1
-        return 0
-      })
+    }
+    if (value === "hardest-first") {
+      sortedSubjects = [...subjects].sort((a, b) => {
+        if (parseInt(a.difficulty) > parseInt(b.difficulty)) return -1;
+        else if (parseInt(a.difficulty) < parseInt(b.difficulty)) return 1;
+        return 0;
+      });
+    }
+
+    if (value === "semester") {
+      sortedSubjects = [...subjects].sort((a, b) => {
+        if (parseInt(a.semester) < parseInt(b.semester)) return -1;
+        else if (parseInt(a.semester) > parseInt(b.semester)) return 1;
+        return 0;
+      });
     }
 
     if (value === "default") {
@@ -149,7 +159,11 @@ const Container = () => {
     if (!filters.filterSemester.length) {
       return subject;
     }
-    return filters.filterSemester.includes(subject.semester);
+    if (filters.filterSemester === "winter") {
+      return subject.semester % 2 === 1;
+    } else {
+      return subject.semester % 2 === 0;
+    }
   };
 
   const filterByDifficulty = subject => {

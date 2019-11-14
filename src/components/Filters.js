@@ -29,17 +29,21 @@ const Filters = props => {
   };
 
   const handleChange = e => {
-    const { name, value } = e.target;
+    let { name, value } = e.target;
+    if(value === null){
+      value = []
+    }
     setFilters({ ...filters, [name]: value });
     props.onFilterChange(name, value);
   };
 
   const handleSortBy = e => {
-    const { value } = e.target;
+    let { value } = e.target;
     if (value === null) {
-      props.sortBy("default");
-      setSortedBy("default");
-      return;
+      // props.sortBy("default");
+      // setSortedBy("default");
+      // return;
+      value = 'default'
     }
     props.sortBy(value);
     setSortedBy(value);
@@ -77,6 +81,8 @@ const Filters = props => {
     { label: "Easiest First", value: "easies-first" },
     { label: "Hardest First", value: "hardest-first" }
   ];
+
+  const sortBySemesterOptions = [{ label: "Semester", value: "semester" }];
 
   return (
     <Container>
@@ -252,7 +258,6 @@ const Filters = props => {
               <p>Choose Semester:</p>
               <SelectButton
                 value={filters.semester}
-                multiple={true}
                 options={semesterOptions}
                 name="semester"
                 onChange={handleChange}
@@ -315,6 +320,25 @@ const Filters = props => {
                   tooltipOptions={{ position: "bottom" }}
                 />
               </div>
+
+              <div
+                style={{
+                  display: "flex",
+                  justifyContent: "space-between",
+                  alignItems: "center"
+                }}
+              >
+                <p>Sort By Semester:</p>
+                <SelectButton
+                  value={sortedBy}
+                  options={sortBySemesterOptions}
+                  name="sortBySemester"
+                  onChange={handleSortBy}
+                  tooltip="Sort By Semester"
+                  tooltipOptions={{ position: "bottom" }}
+                />
+              </div>
+
               <div
                 style={{
                   display: "flex",
