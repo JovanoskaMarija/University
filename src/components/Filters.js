@@ -233,7 +233,6 @@ const Filters = props => {
               <p>Choose Difficulty:</p>
               <SelectButton
                 value={filters.difficulty}
-                multiple={true}
                 options={difficultyOptions}
                 name="difficulty"
                 onChange={handleChange}
@@ -291,10 +290,11 @@ const Filters = props => {
               />
             </OverlayPanel>
           </Separator>
+          
           <Separator>
             <Button
               type="button"
-              label="Sort Subjects"
+              label="Sort By"
               onClick={e => {
                 filters.sortByOverlayPanel.toggle(e);
               }}
@@ -310,7 +310,7 @@ const Filters = props => {
                   alignItems: "center"
                 }}
               >
-                <p>Sort By Name: </p>
+                <p>Name: </p>
                 <SelectButton
                   value={sortedBy}
                   options={sortByNameOptions}
@@ -328,7 +328,7 @@ const Filters = props => {
                   alignItems: "center"
                 }}
               >
-                <p>Sort By Semester:</p>
+                <p>Semester:</p>
                 <SelectButton
                   value={sortedBy}
                   options={sortBySemesterOptions}
@@ -346,7 +346,7 @@ const Filters = props => {
                   alignItems: "center"
                 }}
               >
-                <p>Sort By Name:</p>
+                <p>Name:</p>
                 <SelectButton
                   value={sortedBy}
                   options={sortByDifficultyOptions}
@@ -363,5 +363,6 @@ const Filters = props => {
     </Container>
   );
 };
+
 
 export default Filters;

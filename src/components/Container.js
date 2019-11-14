@@ -170,7 +170,14 @@ const Container = () => {
     if (!filters.filterDifficulty.length) {
       return subject;
     }
-    return filters.filterDifficulty.includes(subject.difficulty);
+    if (filters.filterDifficulty === "easy") {
+      return parseInt(subject.difficulty)  === 1;
+    } else if (filters.filterDifficulty === "medium") {
+      return parseInt(subject.difficulty)  === 5;
+    } else{
+      return parseInt(subject.difficulty) === 10;
+    }
+    // return filters.filterDifficulty.includes(subject.difficulty);
   };
 
   const filterBySelected = subject => {
