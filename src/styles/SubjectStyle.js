@@ -1,5 +1,13 @@
 import styled from "styled-components";
 
+const colorForDifficulty = value => {
+  let color;
+  // if(value === 1) "backgroung-color: rgb(0,128,0)"
+  // if(value === 5) "backgroung-color: rgb(240,202,0)"
+  // if(value === 10) "backgroung-color: rgb(255,0,0)"
+  return color;
+}
+
 export const Item = styled.div`
   box-sizing: border-box;
   display: flex;
@@ -11,60 +19,24 @@ export const Item = styled.div`
   margin: 20px;
   background-color: #fbf9f9;
   color: #053d57;
-  /* p {
-    margin: 0;
-    margin-top: 10px;
-  } */
 `;
+function getColor(diff, sel, attr="background-color"){
+
+  const lightness = sel ? 85 : 50
+  switch (diff){
+   case 1: return `${attr}: hsl(100, 100%, ${lightness}%)`;
+   case 5: return `${attr}: hsl(54, 100%, ${lightness}%)`;
+   case 10: return `${attr}: hsl(0, 100%,  ${lightness}%)`;
+  }
+
+}
 
 export const SideColor = styled.div`
   border-radius: 6px 0 0 6px;
   height: 100%;
   width: 40px;
   margin-right: 10px;
-  ${props =>
-    parseInt(props.difficulty) === 1
-      ? "background-color: rgb(0,128,0)"
-      : "background-color: null"};
-  ${props =>
-    parseInt(props.difficulty) === 5
-      ? "background-color: rgb(240,202,0)"
-      : "background-color: null"};
-  ${props =>
-    parseInt(props.difficulty) === 10
-      ? "background-color: rgb(255,0,0)"
-      : "background-color: null"};
-  ${props =>
-    parseInt(props.difficulty) === 1 && props.isSelected
-      ? "background-color: rgba(0,128,0,0.4)"
-      : null}
-  ${props =>
-    parseInt(props.difficulty) === 5 && props.isSelected
-      ? "background-color: rgba(240,202,0,0.4)"
-      : null}
-  ${props =>
-    parseInt(props.difficulty) === 10 && props.isSelected
-      ? "background-color: rgba(255,0,0,0.4)"
-      : null}
-  /* ${props =>
-    parseInt(props.difficulty) === 1
-      ? // !props.isSelected && parseInt(props.difficulty === 10)
-        "backgound-color: rgb(255,0,0)"
-      : "background-color: null"} */
-  /* ${
-    props =>
-      parseInt(props.difficulty) === 1 && !props.isSelected
-        ? "background-color: red"
-        : null
-    // : "background-color: rgb(255, 128, 128)"
-  };
-  ${
-    props =>
-      parseInt(props.difficulty) === 5 && !props.isSelected
-        ? "background-color: rgb(255,255,0)"
-        : null
-    // : "background-color: rgba(255,255,0,0.1)"
-  } */
+ ${props => props.difficulty ? getColor(props.difficulty, props.isSelected) : null}
 `;
 
 export const Content = styled.div`
@@ -86,23 +58,8 @@ export const DifficultyLevel = styled.div`
     /* font-size: 18px; */
     font-weight: bold;
     ${props =>
-      parseInt(props.difficulty) === 1 ? "color: rgb(0,128,0)" : null};
-    ${props =>
-      parseInt(props.difficulty) === 5 ? "color: rgb(240,202,0)" : null};
-    ${props =>
-      parseInt(props.difficulty) === 10 ? "color: rgb(255,0,0)" : null};
-    ${props =>
-      parseInt(props.difficulty) === 1 && props.isSelected
-        ? "color: rgba(0,128,0,0.4)"
-        : null}
-    ${props =>
-      parseInt(props.difficulty) === 5 && props.isSelected
-        ? "color: rgba(240,202,0,0.4)"
-        : null}
-    ${props =>
-      parseInt(props.difficulty) === 10 && props.isSelected
-        ? "color: rgba(255,0,0,0.4)"
-        : null}
+      props.difficulty? getColor(props.difficulty,props.isSelected,'color') : null};
+    
 `;
 
 export const Header = styled.div`

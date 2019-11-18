@@ -1,7 +1,7 @@
 import React from "react";
 import { ToggleButton } from "primereact/togglebutton";
 import { Link } from "@reach/router";
-import Range from './Range'
+import Range from "./Range";
 // import { Button } from "primereact/button";
 // import { OverlayPanel } from "primereact/overlaypanel";
 import {
@@ -21,11 +21,10 @@ import {
   Description,
   Icons,
   Tooltip,
-  DifficultyLevel,
+  DifficultyLevel
 } from "../styles/SubjectStyle";
 
 const Subject = props => {
-
   return (
     <Item>
       {/* SideColor shows the level of difficulty */}
@@ -36,11 +35,13 @@ const Subject = props => {
       <Content>
         <Header isSelected={props.data.isSelected}>
           <DifficultyLevel
+          
             difficulty={props.data.difficulty}
             isSelected={props.data.isSelected}
           >
             {props.data.difficulty}
           </DifficultyLevel>
+
           <p>{props.data.name} </p>
           <div>
             {/* <Button
@@ -52,7 +53,6 @@ const Subject = props => {
               onClick={e => this.op.toggle(e)}
             /> */}
             <ToggleButton
-              // style={{ width: "160px", height: "30px" }}
               style={{ width: "80px", height: "30px" }}
               name="isSelected"
               onIcon="pi pi-check"
@@ -84,10 +84,7 @@ const Subject = props => {
             />
           </div>
         </Header>
-        {/* 
-        <h3>{props.data.professor}</h3> */}
         <div>
-          {/* Semester: {props.data.semester} */}
           <Description>
             {props.data.description}
             <Link to={`/subjects/${props.data._id}`}>

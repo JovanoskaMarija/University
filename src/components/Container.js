@@ -33,7 +33,7 @@ const Container = () => {
   useEffect(() => {
     fetch("http://localhost:5000/subjects/", { method: "get" })
       .then(res => res.json())
-      .then(data => setSubjects(data))
+      .then(data => {setSubjects(data);console.log(data)})
       .catch(err => console.log(err));
   }, []);
 
