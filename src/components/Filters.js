@@ -1,123 +1,368 @@
-import React, { Component } from "react";
-import styled from "styled-components";
+import React, { useState } from "react";
+import {
+  Container,
+  Filter,
+  Separator,
+  ToggleFilters
+} from "../styles/FiltersStyle";
+import { InputText } from "primereact/inputtext";
+import { SelectButton } from "primereact/selectbutton";
+import { ToggleButton } from "primereact/togglebutton";
+import { Button } from "primereact/button";
+import { OverlayPanel } from "primereact/overlaypanel";
 
-// import { SelectButton } from '@bit/primefaces.primereact.selectbutton';
-// import PrimereactStyle from '@bit/primefaces.primereact.internal.stylelinks';
+const Filters = props => {
+  const [showFilters, setShowFilters] = useState(false);
+  const [filters, setFilters] = useState({
+    professor: "",
+    program: "",
+    exam: "",
+    semester: "",
+    difficulty: "",
+    isPassed: false
+  });
 
-// import { SelectButton } from "primereact/selectbutton";
-// import {MultiSelect} from 'primereact/multiselect';
+  const [sortedBy, setSortedBy] = useState("");
 
-// import "primereact/resources/themes/nova-light/theme.css";
-// import "primereact/resources/primereact.min.css";
-// import "primeicons/primeicons.css";
-
-const Filter = styled.div`
-  width: 96%;
-  margin: auto;
-  display: flex;
-  justify-content: space-between;
-  box-sizing: border-box;
-  margin-top: 30px;
-  padding: 10px;
-  background-color: #ffffff;
-  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1),
-    0 2px 4px -1px rgba(0, 0, 0, 0.06);
-  border: none;
-  border-radius: 6px;
-`;
-
-class Filters extends Component {
-  constructor(props) {
-    super(props);
-  }
-  handleFilterProfessorChange = e => {
-    //console.log("Search text , ", e.target.name, e.target.value)
-    this.props.onFilterProfessorChange(e.target.value);
+  const onShowFilters = () => {
+    setShowFilters(!showFilters);
   };
 
-  handleFilterNameChange = e => {
-    this.props.onFilterNameChange(e.target.value);
+  const handleChange = e => {
+    let { name, value } = e.target;
+    if(value === null){
+      value = []
+    }
+    setFilters({ ...filters, [name]: value });
+    props.onFilterChange(name, value);
   };
 
-  handleFilterFacultyChange = e => {
-    this.props.onFilterFacultyChange(e.target.value);
+  const handleSortBy = e => {
+    let { value } = e.target;
+    if (value === null) {
+      // props.sortBy("default");
+      // setSortedBy("default");
+      // return;
+      value = 'default'
+    }
+    props.sortBy(value);
+    setSortedBy(value);
   };
 
-  render() {
-    //let data = this.props.data;
-    //const options = this.props.program;
+  const programOptions = [
+    { label: "New", value: "new" },
+    { label: "Old", value: "old" }
+  ];
 
-    const option =[
-      {label: 'Audi', value: 'Audi'},
-      {label: 'BMW', value: 'BMW'},
-      {label: 'Fiat', value: 'Fiat'},
-      {label: 'Honda', value: 'Honda'},
-      {label: 'Jaguar', value: 'Jaguar'},
-      {label: 'Mercedes', value: 'Mercedes'},
-      {label: 'Renault', value: 'Renault'},
-      {label: 'VW', value: 'VW'},
-      {label: 'Volvo', value: 'Volvo'}
+  const examOptions = [
+    { label: "Exam", value: "exam" },
+    { label: "Midterms", value: "midterms" }
+  ];
 
-    ]
-    return (
-      <Filter>
-        <form>
-          <input
-            type="text"
-            placeholder="Search Professor"
-            onChange={this.handleFilterProfessorChange}
-            value={this.props.filterProfessor}
-          />{" "}
+  const semesterOptions = [
+    { label: "Winter", value: "winter" },
+    { label: "Summer", value: "summer" }
+  ];
 
-          <input
-            type="text"
-            placeholder="Search Subject Name"
-            onChange={this.handleFilterNameChange}
-            value={this.props.filterName}
-          />{" "}
+  const difficultyOptions = [
+    { label: "Easy", value: "easy" },
+    { label: "Medium", value: "medium" },
+    { label: "Difficult", value: "difficult" }
+  ];
 
-          <input
-            type="text"
-            placeholder="Search Faculty"
-            onChange={this.handleFilterFacultyChange}
-            value={this.props.filterFaculty}
-          />{" "}
+  const isPassedOptions = [{ label: "Passed", value: true }];
 
-          {/* <MultiSelect 
-            value={this.props.filterProfessor}
-            placeholder="Search Professor"
-            onChange={this.handleFilterProfessorChange}
-            filter={true}
-            options={option}
-          /> */}
+  const sortByNameOptions = [
+    { label: "A-Z", value: "a-z" },
+    { label: "Z-A", value: "z-a" }
+  ];
 
-          {/* <SelectButton 
-            value={this.props.filterProgram} 
-            multiple={true} 
-            options={cars} 
-            onChange={(e) => this.setState({filterProgram: e.value})} 
-          /> */}
-          <br />
-          {/* <select onChange={this.handleTitleChange} >
-            {data &&
-              data.map(subjectDetails => (
-                <option value={subjectDetails.title} key={subjectDetails.id}>
-                  {subjectDetails.title}
-                </option>
-              ))}
-          </select>
-          <select>
-            {data &&
-              data.map(subjectDetails => (
-                <option value={subjectDetails.professor} key={subjectDetails.id}>
-                  {subjectDetails.professor}
-                </option>
-              ))}
-          </select> */}
-        </form>
-      </Filter>
-    );
-  }
-}
+  const sortByDifficultyOptions = [
+    { label: "Easiest First", value: "easies-first" },
+    { label: "Hardest First", value: "hardest-first" }
+  ];
+
+  const sortBySemesterOptions = [{ label: "Semester", value: "semester" }];
+
+  return (
+    <Container>
+      <ToggleFilters>
+        <ToggleButton
+          style={{ width: "120px" }}
+          onLabel="Show Filters"
+          offLabel="Hide Filters"
+          checked={!showFilters}
+          onChange={onShowFilters}
+        />
+      </ToggleFilters>
+
+      {showFilters && (
+        <Filter>
+          <Separator>
+            <Button
+              type="button"
+              label="Professor"
+              onClick={e => filters.professorOverlayPanel.toggle(e)}
+            />
+            <OverlayPanel
+              style={{ backgroundColor: "#F2F1EF" }}
+              ref={el => (filters.professorOverlayPanel = el)}
+            >
+              <p>Enter Professor:</p>
+              <InputText
+                id="float-input"
+                type="text"
+                size="30"
+                name="professor"
+                value={props.filterProfessor}
+                onChange={handleChange}
+                tooltip="Professor"
+                tooltipOptions={{ position: "bottom" }}
+              />
+            </OverlayPanel>
+          </Separator>
+
+          <Separator>
+            <Button
+              type="button"
+              label="Subject Name"
+              onClick={e => filters.nameOverlayPanel.toggle(e)}
+            />
+            <OverlayPanel
+              style={{ backgroundColor: "#F2F1EF" }}
+              ref={el => (filters.nameOverlayPanel = el)}
+            >
+              <p>Enter Subject Name:</p>
+              <InputText
+                id="float-input"
+                type="text"
+                size="30"
+                name="name"
+                value={props.filterName}
+                onChange={handleChange}
+                tooltip="Name"
+                tooltipOptions={{ position: "bottom" }}
+              />
+            </OverlayPanel>
+          </Separator>
+
+          <Separator>
+            <Button
+              type="button"
+              label="Faculty"
+              onClick={e => filters.facultyOverlayPanel.toggle(e)}
+            />
+            <OverlayPanel
+              style={{ backgroundColor: "#F2F1EF" }}
+              ref={el => (filters.facultyOverlayPanel = el)}
+            >
+              <p>Enter Faculty:</p>
+              <InputText
+                id="float-input"
+                type="text"
+                size="30"
+                name="faculty"
+                value={props.filterFaculty}
+                onChange={handleChange}
+                tooltip="Faculty"
+                tooltipOptions={{ position: "bottom" }}
+              />
+            </OverlayPanel>
+          </Separator>
+
+          <Separator>
+            <Button
+              type="button"
+              label="Program"
+              onClick={e => filters.programOverlayPanel.toggle(e)}
+            />
+            <OverlayPanel
+              style={{ backgroundColor: "#F2F1EF" }}
+              ref={el => (filters.programOverlayPanel = el)}
+            >
+              <p>Choose Program: </p>
+              <SelectButton
+                value={filters.program}
+                multiple={true}
+                options={programOptions}
+                name="program"
+                onChange={handleChange}
+                tooltip="Program"
+                tooltipOptions={{ position: "bottom" }}
+              />
+            </OverlayPanel>
+          </Separator>
+
+          <Separator>
+            <Button
+              type="button"
+              label="Exam"
+              onClick={e => {
+                filters.examOverlayPanel.toggle(e);
+              }}
+            />
+            <OverlayPanel
+              style={{ backgroundColor: "#F2F1EF" }}
+              ref={el => (filters.examOverlayPanel = el)}
+            >
+              <p>Choose Exam Options:</p>
+              <SelectButton
+                value={filters.exam}
+                multiple={true}
+                options={examOptions}
+                name="exam"
+                onChange={handleChange}
+                tooltip="Exam"
+                tooltipOptions={{ position: "bottom" }}
+              />
+            </OverlayPanel>
+          </Separator>
+
+          <Separator>
+            <Button
+              type="button"
+              label="Difficulty"
+              onClick={e => {
+                filters.difficultyOverlayPanel.toggle(e);
+              }}
+            />
+            <OverlayPanel
+              style={{ backgroundColor: "#F2F1EF" }}
+              ref={el => (filters.difficultyOverlayPanel = el)}
+            >
+              <p>Choose Difficulty:</p>
+              <SelectButton
+                value={filters.difficulty}
+                options={difficultyOptions}
+                name="difficulty"
+                onChange={handleChange}
+                tooltip="Difficulty"
+                tooltipOptions={{ position: "bottom" }}
+              />
+            </OverlayPanel>
+          </Separator>
+
+          <Separator>
+            <Button
+              type="button"
+              label="Semester"
+              onClick={e => {
+                filters.semesterOverlayPanel.toggle(e);
+              }}
+            />
+            <OverlayPanel
+              style={{ backgroundColor: "#F2F1EF" }}
+              ref={el => (filters.semesterOverlayPanel = el)}
+            >
+              <p>Choose Semester:</p>
+              <SelectButton
+                value={filters.semester}
+                options={semesterOptions}
+                name="semester"
+                onChange={handleChange}
+                tooltip="Semester"
+                tooltipOptions={{ position: "bottom" }}
+              />
+            </OverlayPanel>
+          </Separator>
+
+          <Separator>
+            <Button
+              type="button"
+              label="Passed"
+              onClick={e => {
+                filters.passedOverlayPanel.toggle(e);
+              }}
+            />
+            <OverlayPanel
+              style={{ backgroundColor: "#F2F1EF" }}
+              ref={el => (filters.passedOverlayPanel = el)}
+            >
+              <p>Choose Passed Subjects:</p>
+              <SelectButton
+                value={filters.isPassed}
+                multiple={true}
+                options={isPassedOptions}
+                name="isPassed"
+                onChange={handleChange}
+                tooltip="Passed"
+                tooltipOptions={{ position: "bottom" }}
+              />
+            </OverlayPanel>
+          </Separator>
+          
+          <Separator>
+            <Button
+              type="button"
+              label="Sort By"
+              onClick={e => {
+                filters.sortByOverlayPanel.toggle(e);
+              }}
+            />
+            <OverlayPanel
+              style={{ backgroundColor: "#F2F1EF" }}
+              ref={el => (filters.sortByOverlayPanel = el)}
+            >
+              <div
+                style={{
+                  display: "flex",
+                  justifyContent: "space-between",
+                  alignItems: "center"
+                }}
+              >
+                <p>Name: </p>
+                <SelectButton
+                  value={sortedBy}
+                  options={sortByNameOptions}
+                  name="sortByName"
+                  onChange={handleSortBy}
+                  tooltip="Sort By Name"
+                  tooltipOptions={{ position: "bottom" }}
+                />
+              </div>
+
+              <div
+                style={{
+                  display: "flex",
+                  justifyContent: "space-between",
+                  alignItems: "center"
+                }}
+              >
+                <p>Semester:</p>
+                <SelectButton
+                  value={sortedBy}
+                  options={sortBySemesterOptions}
+                  name="sortBySemester"
+                  onChange={handleSortBy}
+                  tooltip="Sort By Semester"
+                  tooltipOptions={{ position: "bottom" }}
+                />
+              </div>
+
+              <div
+                style={{
+                  display: "flex",
+                  justifyContent: "space-between",
+                  alignItems: "center"
+                }}
+              >
+                <p>Name:</p>
+                <SelectButton
+                  value={sortedBy}
+                  options={sortByDifficultyOptions}
+                  name="sortByDifficulty"
+                  onChange={handleSortBy}
+                  tooltip="Sort By Difficulty"
+                  tooltipOptions={{ position: "bottom" }}
+                />
+              </div>
+            </OverlayPanel>
+          </Separator>
+        </Filter>
+      )}
+    </Container>
+  );
+};
+
 
 export default Filters;
