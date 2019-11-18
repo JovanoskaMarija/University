@@ -1,8 +1,9 @@
 import React from "react";
 import { ToggleButton } from "primereact/togglebutton";
 import { Link } from "@reach/router";
-import { Button } from "primereact/button";
-import { OverlayPanel } from "primereact/overlaypanel";
+import Range from './Range'
+// import { Button } from "primereact/button";
+// import { OverlayPanel } from "primereact/overlaypanel";
 import {
   IconPaw,
   IconTshirt,
@@ -19,16 +20,28 @@ import {
   Header,
   Description,
   Icons,
-  Tooltip
+  Tooltip,
+  DifficultyLevel,
 } from "../styles/SubjectStyle";
 
 const Subject = props => {
+
   return (
     <Item>
-      <SideColor isSelected={props.data.isSelected} />
+      {/* SideColor shows the level of difficulty */}
+      <SideColor
+        isSelected={props.data.isSelected}
+        difficulty={props.data.difficulty}
+      />
       <Content>
         <Header isSelected={props.data.isSelected}>
-          <h4>{props.data.name} </h4>
+          <DifficultyLevel
+            difficulty={props.data.difficulty}
+            isSelected={props.data.isSelected}
+          >
+            {props.data.difficulty}
+          </DifficultyLevel>
+          <p>{props.data.name} </p>
           <div>
             {/* <Button
               icon="pi pi-ellipsis-h"
@@ -69,14 +82,12 @@ const Subject = props => {
                 props.handlePassed(props.data._id);
               }}
             />
-            
           </div>
         </Header>
         {/* 
         <h3>{props.data.professor}</h3> */}
         <div>
-          Semester: {props.data.semester}<br/>
-          Diff:{props.data.difficulty}
+          {/* Semester: {props.data.semester} */}
           <Description>
             {props.data.description}
             <Link to={`/subjects/${props.data._id}`}>
@@ -106,19 +117,8 @@ const Subject = props => {
             </span>
           </Tooltip>
         </Icons>
-        {/* <Icons>
-          
-          <Tooltip>
-            <span data-tooltip="Projects">
-              <IconTshirt />
-            </span>
-          </Tooltip>
-          <Tooltip>
-            <span data-tooltip="Exam">
-              <IconCafe />
-            </span>
-          </Tooltip>
-        </Icons> */}
+        <br />
+        <Range data={props.data} />
       </Content>
     </Item>
   );
