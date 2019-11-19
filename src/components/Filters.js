@@ -12,7 +12,7 @@ import { Button } from "primereact/button";
 import { OverlayPanel } from "primereact/overlaypanel";
 
 const Filters = props => {
-  const [showFilters, setShowFilters] = useState(false);
+  const [showFilters, setShowFilters] = useState(true);
   const [filters, setFilters] = useState({
     professor: "",
     program: "",
@@ -23,15 +23,14 @@ const Filters = props => {
   });
 
   const [sortedBy, setSortedBy] = useState("");
-
   const onShowFilters = () => {
     setShowFilters(!showFilters);
   };
 
   const handleChange = e => {
     let { name, value } = e.target;
-    if(value === null){
-      value = []
+    if (value === null) {
+      value = [];
     }
     setFilters({ ...filters, [name]: value });
     props.onFilterChange(name, value);
@@ -40,13 +39,10 @@ const Filters = props => {
   const handleSortBy = e => {
     let { value } = e.target;
     if (value === null) {
-      // props.sortBy("default");
-      // setSortedBy("default");
-      // return;
-      value = 'default'
+      value = "default";
     }
-    props.sortBy(value);
     setSortedBy(value);
+    props.sortBy(value);
   };
 
   const programOptions = [
@@ -73,8 +69,8 @@ const Filters = props => {
   const isPassedOptions = [{ label: "Passed", value: true }];
 
   const sortByNameOptions = [
-    { label: "A-Z", value: "a-z" },
-    { label: "Z-A", value: "z-a" }
+    { label: "A-Z", value: "a-z", sort: "name", sortIn: "ascending" },
+    { label: "Z-A", value: "z-a", sort: "name", sortIn: "descendin" }
   ];
 
   const sortByDifficultyOptions = [
@@ -83,6 +79,8 @@ const Filters = props => {
   ];
 
   const sortBySemesterOptions = [{ label: "Semester", value: "semester" }];
+
+;
 
   return (
     <Container>
@@ -290,7 +288,7 @@ const Filters = props => {
               />
             </OverlayPanel>
           </Separator>
-          
+
           <Separator>
             <Button
               type="button"
@@ -306,13 +304,13 @@ const Filters = props => {
               <div
                 style={{
                   display: "flex",
-                  justifyContent: "space-between",
                   alignItems: "center"
                 }}
               >
                 <p>Name: </p>
                 <SelectButton
                   value={sortedBy}
+                  sort={sortedBy}
                   options={sortByNameOptions}
                   name="sortByName"
                   onChange={handleSortBy}
@@ -324,7 +322,6 @@ const Filters = props => {
               <div
                 style={{
                   display: "flex",
-                  justifyContent: "space-between",
                   alignItems: "center"
                 }}
               >
@@ -342,7 +339,6 @@ const Filters = props => {
               <div
                 style={{
                   display: "flex",
-                  justifyContent: "space-between",
                   alignItems: "center"
                 }}
               >
@@ -363,6 +359,5 @@ const Filters = props => {
     </Container>
   );
 };
-
 
 export default Filters;

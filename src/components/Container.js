@@ -68,9 +68,10 @@ const Container = () => {
     setSubjects(newPassedList);
   };
 
-  const sortBy = value => {
+  const sortBy = (value) => {
     let sortedSubjects;
-    if (value === sortedBy) {
+
+     if (value === sortedBy) {
       return;
     }
     if (value === "a-z") {
