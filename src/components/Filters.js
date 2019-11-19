@@ -37,12 +37,63 @@ const Filters = props => {
   };
 
   const handleSortBy = e => {
+    //console.log(e.target);
     let { value } = e.target;
     if (value === null) {
       value = "default";
     }
-    setSortedBy(value);
-    props.sortBy(value);
+
+    //go zema value od Options i spored toa odreduva sortBy, sortIn
+    const sortOptionsMapping = {
+      "a-z": {
+        sortBy: "name",
+        sortIn: "asc"
+      },
+      "z-a": {
+        sortBy: "name",
+        sortIn: "desc"
+      },
+      "easiest-first": {
+        sortBy: "difficulty",
+        sortIn: 'asc'
+      },
+      // "easies-first": {
+      //   sortBy: "difficulty",
+      //   sortIn: "acs"
+      // },
+      "hardest-first": {
+        sortBy: "difficulty",
+        sortIn: "desc"
+      },
+      semester: {
+        sortBy: "semester",
+        sortIn: "asc"
+      },
+      "less-popular": {
+        sortBy: "studentsAttending",
+        sortIn: "asc"
+      },
+      "most-popular": {
+        sortBy: "studentsAttending",
+        sortIn: "desc"
+      },
+      "lowest-grade": {
+        sortBy: "averageGrade",
+        sortIn: "asc"
+      },
+      "highest-grade": {
+        sortBy: "averageGrade",
+        sortIn: "desc"
+      },
+      'default':{
+        sortBy: '_id',
+        sortIn: 'asc'
+      }
+    };
+
+    setSortedBy(value)
+    const { sortBy, sortIn } = sortOptionsMapping[value];
+    props.sortData(sortBy, sortIn);
   };
 
   const programOptions = [
@@ -69,27 +120,26 @@ const Filters = props => {
   const isPassedOptions = [{ label: "Passed", value: true }];
 
   const sortByNameOptions = [
-    { label: "A-Z", value: "a-z", sort: "name", sortIn: "ascending" },
-    { label: "Z-A", value: "z-a", sort: "name", sortIn: "descendin" }
+    { label: "A-Z", value: "a-z" },
+    { label: "Z-A", value: "z-a" }
   ];
 
   const sortByDifficultyOptions = [
-    { label: "Easiest First", value: "easies-first" },
+    { label: "Easiest First", value: "easiest-first" },
     { label: "Hardest First", value: "hardest-first" }
   ];
 
   const sortBySemesterOptions = [{ label: "Semester", value: "semester" }];
 
-  const sortByPopularityOptions =[
-    {label: "Less Popular", value:"less-popular"},
-    {label: "Most Popular", value:"most-popular"},
+  const sortByPopularityOptions = [
+    { label: "Less Popular", value: "less-popular" },
+    { label: "Most Popular", value: "most-popular" }
   ];
 
   const sortByAverageGradeOptions = [
-    {label: "Lowest", value: "lowest-grade"},
-    {label: "Highest", value: "highest-grade"}
-  ]
-
+    { label: "Lowest", value: "lowest-grade" },
+    { label: "Highest", value: "highest-grade" }
+  ];
 
   return (
     <Container>
@@ -319,7 +369,6 @@ const Filters = props => {
                 <p>Name: </p>
                 <SelectButton
                   value={sortedBy}
-                  sort={sortedBy}
                   options={sortByNameOptions}
                   name="sortByName"
                   onChange={handleSortBy}
@@ -328,7 +377,7 @@ const Filters = props => {
                 />
               </div>
 
-              <div style={{display: "flex",alignItems: "center"}}>
+              <div style={{ display: "flex", alignItems: "center" }}>
                 <p>Semester:</p>
                 <SelectButton
                   value={sortedBy}
@@ -340,7 +389,7 @@ const Filters = props => {
                 />
               </div>
 
-              <div style={{display: "flex",alignItems: "center"}}>
+              <div style={{ display: "flex", alignItems: "center" }}>
                 <p>Name:</p>
                 <SelectButton
                   value={sortedBy}
@@ -352,7 +401,7 @@ const Filters = props => {
                 />
               </div>
 
-              <div style={{display: "flex", alignItems: "center"}}>
+              <div style={{ display: "flex", alignItems: "center" }}>
                 <p>Popularity:</p>
                 <SelectButton
                   value={sortedBy}
@@ -360,11 +409,11 @@ const Filters = props => {
                   name="sortByPopularity"
                   onChange={handleSortBy}
                   tooltip="Sort By Popularity"
-                  tooptipOptions={{position: "bottom"}}
+                  tooptipOptions={{ position: "bottom" }}
                 />
               </div>
 
-              <div style={{display: "flex", alignItems: "center"}}>
+              <div style={{ display: "flex", alignItems: "center" }}>
                 <p>Average Grade:</p>
                 <SelectButton
                   value={sortedBy}
@@ -372,7 +421,7 @@ const Filters = props => {
                   name="SortByAverageGrade"
                   onChange={handleSortBy}
                   tooltip="Sort By Average Grade"
-                  tooltipOptions={{position: "bottom"}}
+                  tooltipOptions={{ position: "bottom" }}
                 />
               </div>
             </OverlayPanel>
