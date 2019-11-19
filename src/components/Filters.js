@@ -80,7 +80,11 @@ const Filters = props => {
 
   const sortBySemesterOptions = [{ label: "Semester", value: "semester" }];
 
-;
+  const sortByPopularityOptions =[
+    {label: "Less Popular", value:"less-popular"},
+    {label: "Most Popular", value:"most-popular"},
+  ]
+
 
   return (
     <Container>
@@ -319,12 +323,7 @@ const Filters = props => {
                 />
               </div>
 
-              <div
-                style={{
-                  display: "flex",
-                  alignItems: "center"
-                }}
-              >
+              <div style={{display: "flex",alignItems: "center"}}>
                 <p>Semester:</p>
                 <SelectButton
                   value={sortedBy}
@@ -336,12 +335,7 @@ const Filters = props => {
                 />
               </div>
 
-              <div
-                style={{
-                  display: "flex",
-                  alignItems: "center"
-                }}
-              >
+              <div style={{display: "flex",alignItems: "center"}}>
                 <p>Name:</p>
                 <SelectButton
                   value={sortedBy}
@@ -350,6 +344,18 @@ const Filters = props => {
                   onChange={handleSortBy}
                   tooltip="Sort By Difficulty"
                   tooltipOptions={{ position: "bottom" }}
+                />
+              </div>
+
+              <div style={{display: "flex", alignItems: "center"}}>
+                <p>Popularity:</p>
+                <SelectButton
+                  value={sortedBy}
+                  options={sortByPopularityOptions}
+                  name="sortByPopularity"
+                  onChange={handleSortBy}
+                  tooltip="Sort By Popularity"
+                  tooptipOptions={{position: "bottom"}}
                 />
               </div>
             </OverlayPanel>

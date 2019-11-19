@@ -104,6 +104,22 @@ const Container = () => {
       });
     }
 
+    
+    if (value === "less-popular") {
+      sortedSubjects = [...subjects].sort((a, b) => {
+        if (parseInt(a.studentsAttending) < parseInt(b.studentsAttending)) return -1;
+        else if (parseInt(a.studentsAttending) > parseInt(b.studentsAttending)) return 1;
+        return 0;
+      });
+    }
+    
+    if (value === "most-popular") {
+      sortedSubjects = [...subjects].sort((a, b) => {
+        if (parseInt(a.studentsAttending) > parseInt(b.studentsAttending)) return -1;
+        else if (parseInt(a.studentsAttending) < parseInt(b.studentsAttending)) return 1;
+        return 0;
+      });
+    }
     if (value === "semester") {
       sortedSubjects = [...subjects].sort((a, b) => {
         if (parseInt(a.semester) < parseInt(b.semester)) return -1;

@@ -85,6 +85,7 @@ const Subject = props => {
           </div>
         </Header>
         <div>
+            Popularity: {props.data.studentsAttending}
           <Description>
             {props.data.description}
             <Link to={`/subjects/${props.data._id}`}>
