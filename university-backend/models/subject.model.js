@@ -16,6 +16,7 @@ const subjectSchema = new Schema({
   projects: String,
   exam: String,
   studentsAttending: Number,
+  averageGrade: Number,
   isSelected: Boolean,
   isPassed: Boolean
 });

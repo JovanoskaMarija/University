@@ -83,6 +83,11 @@ const Filters = props => {
   const sortByPopularityOptions =[
     {label: "Less Popular", value:"less-popular"},
     {label: "Most Popular", value:"most-popular"},
+  ];
+
+  const sortByAverageGradeOptions = [
+    {label: "Lowest", value: "lowest-grade"},
+    {label: "Highest", value: "highest-grade"}
   ]
 
 
@@ -356,6 +361,18 @@ const Filters = props => {
                   onChange={handleSortBy}
                   tooltip="Sort By Popularity"
                   tooptipOptions={{position: "bottom"}}
+                />
+              </div>
+
+              <div style={{display: "flex", alignItems: "center"}}>
+                <p>Average Grade:</p>
+                <SelectButton
+                  value={sortedBy}
+                  options={sortByAverageGradeOptions}
+                  name="SortByAverageGrade"
+                  onChange={handleSortBy}
+                  tooltip="Sort By Average Grade"
+                  tooltipOptions={{position: "bottom"}}
                 />
               </div>
             </OverlayPanel>

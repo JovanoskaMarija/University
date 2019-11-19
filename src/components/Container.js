@@ -88,45 +88,63 @@ const Container = () => {
         return 0;
       });
     }
+    
+    if (value === "semester") {
+      sortedSubjects = [...subjects].sort((a, b) => {
+        if (a.semester < b.semester) return -1;
+        else if (a.semester > b.semester) return 1;
+        return 0;
+      });
+    }
 
     if (value === "easies-first") {
       sortedSubjects = [...subjects].sort((a, b) => {
-        if (parseInt(a.difficulty) < parseInt(b.difficulty)) return -1;
-        else if (parseInt(a.difficulty) > parseInt(b.difficulty)) return 1;
+        if (a.difficulty < b.difficulty) return -1;
+        else if (a.difficulty > b.difficulty) return 1;
         return 0;
       });
     }
     if (value === "hardest-first") {
       sortedSubjects = [...subjects].sort((a, b) => {
-        if (parseInt(a.difficulty) > parseInt(b.difficulty)) return -1;
-        else if (parseInt(a.difficulty) < parseInt(b.difficulty)) return 1;
+        if (a.difficulty > b.difficulty) return -1;
+        else if (a.difficulty < b.difficulty) return 1;
         return 0;
       });
     }
-
     
     if (value === "less-popular") {
       sortedSubjects = [...subjects].sort((a, b) => {
-        if (parseInt(a.studentsAttending) < parseInt(b.studentsAttending)) return -1;
-        else if (parseInt(a.studentsAttending) > parseInt(b.studentsAttending)) return 1;
+        if (a.studentsAttending < b.studentsAttending) return -1;
+        else if (a.studentsAttending > b.studentsAttending) return 1;
         return 0;
       });
     }
     
     if (value === "most-popular") {
       sortedSubjects = [...subjects].sort((a, b) => {
-        if (parseInt(a.studentsAttending) > parseInt(b.studentsAttending)) return -1;
-        else if (parseInt(a.studentsAttending) < parseInt(b.studentsAttending)) return 1;
+        if (a.studentsAttending > b.studentsAttending) return -1;
+        else if (a.studentsAttendingb< b.studentsAttending) return 1;
         return 0;
       });
     }
-    if (value === "semester") {
+
+        
+    if (value === "lowest-grade") {
       sortedSubjects = [...subjects].sort((a, b) => {
-        if (parseInt(a.semester) < parseInt(b.semester)) return -1;
-        else if (parseInt(a.semester) > parseInt(b.semester)) return 1;
+        if (a.averageGrade < b.averageGrade) return -1;
+        else if (a.averageGrade > b.studentsAttending) return 1;
         return 0;
       });
     }
+    
+    if (value === "highest-grade") {
+      sortedSubjects = [...subjects].sort((a, b) => {
+        if (a.averageGrade > b.averageGrade) return -1;
+        else if (a.averageGrade < b.averageGrade) return 1;
+        return 0;
+      });
+    }
+
 
     if (value === "default") {
       sortedSubjects = [...subjects].sort((a, b) => {

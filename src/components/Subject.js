@@ -85,7 +85,8 @@ const Subject = props => {
           </div>
         </Header>
         <div>
-            Popularity: {props.data.studentsAttending}
+            <p>Popularity: {props.data.studentsAttending}</p>
+            <p>Average Grade: {props.data.averageGrade}</p>
           <Description>
             {props.data.description}
             <Link to={`/subjects/${props.data._id}`}>
