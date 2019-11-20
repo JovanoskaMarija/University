@@ -2,13 +2,9 @@ import React from "react";
 import { ToggleButton } from "primereact/togglebutton";
 import { Link } from "@reach/router";
 import Range from "./Range";
-// import { Button } from "primereact/button";
-// import { OverlayPanel } from "primereact/overlaypanel";
 import {
   IconPaw,
-  IconTshirt,
   IconHamburger,
-  IconCafe,
   IconGuitar,
   IconMenu
 } from "../icons/Icons";

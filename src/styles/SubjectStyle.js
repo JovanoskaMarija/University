@@ -1,12 +1,5 @@
 import styled from "styled-components";
 
-const colorForDifficulty = value => {
-  let color;
-  // if(value === 1) "backgroung-color: rgb(0,128,0)"
-  // if(value === 5) "backgroung-color: rgb(240,202,0)"
-  // if(value === 10) "backgroung-color: rgb(255,0,0)"
-  return color;
-}
 
 export const Item = styled.div`
   box-sizing: border-box;
@@ -27,6 +20,7 @@ function getColor(diff, sel, attr="background-color"){
    case 1: return `${attr}: hsl(100, 100%, ${lightness}%)`;
    case 5: return `${attr}: hsl(54, 100%, ${lightness}%)`;
    case 10: return `${attr}: hsl(0, 100%,  ${lightness}%)`;
+   default: return
   }
 
 }

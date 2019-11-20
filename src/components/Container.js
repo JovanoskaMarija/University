@@ -87,7 +87,7 @@ const Container = () => {
         else return 0
       }
     })
-
+    setSortedBy(sortedBy)
     setSubjects(sortedSubjects);
     return sortedSubjects 
   }

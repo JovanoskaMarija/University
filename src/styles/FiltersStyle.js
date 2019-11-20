@@ -4,13 +4,6 @@ export const Container = styled.div`
   display: flex;
   flex-direction: row-reverse;
   justify-content: space-between;
-
-  @media only screen and (max-width: 1050px){
-    display: flex;
-    flex-direction: column;
-    align-items: flex-end;
-    justify-content: center
-  }
 `;
 
 export const Filter = styled.div`
