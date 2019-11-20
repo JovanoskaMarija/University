@@ -1,13 +1,5 @@
 import styled from "styled-components";
 
-const colorForDifficulty = value => {
-  let color;
-  // if(value === 1) "backgroung-color: rgb(0,128,0)"
-  // if(value === 5) "backgroung-color: rgb(240,202,0)"
-  // if(value === 10) "backgroung-color: rgb(255,0,0)"
-  return color;
-}
-
 export const Item = styled.div`
   box-sizing: border-box;
   display: flex;
@@ -20,15 +12,18 @@ export const Item = styled.div`
   background-color: #fbf9f9;
   color: #053d57;
 `;
-function getColor(diff, sel, attr="background-color"){
-
-  const lightness = sel ? 85 : 50
-  switch (diff){
-   case 1: return `${attr}: hsl(100, 100%, ${lightness}%)`;
-   case 5: return `${attr}: hsl(54, 100%, ${lightness}%)`;
-   case 10: return `${attr}: hsl(0, 100%,  ${lightness}%)`;
+function getColor(diff, sel, attr = "background-color") {
+  const lightness = sel ? 85 : 50;
+  switch (diff) {
+    case 1:
+      return `${attr}: hsl(100, 100%, ${lightness}%)`;
+    case 5:
+      return `${attr}: hsl(54, 100%, ${lightness}%)`;
+    case 10:
+      return `${attr}: hsl(0, 100%,  ${lightness}%)`;
+    default:
+      return;
   }
-
 }
 
 export const SideColor = styled.div`
@@ -36,7 +31,8 @@ export const SideColor = styled.div`
   height: 100%;
   width: 40px;
   margin-right: 10px;
- ${props => props.difficulty ? getColor(props.difficulty, props.isSelected) : null}
+  ${props =>
+    props.difficulty ? getColor(props.difficulty, props.isSelected) : null}
 `;
 
 export const Content = styled.div`
@@ -48,18 +44,18 @@ export const Content = styled.div`
 `;
 
 export const DifficultyLevel = styled.div`
-    margin: 10px 0 0 10px;
-    width: 30px;
-    height:30px;
-    display: flex;
-    justify-content:center;
-    align-items: center;
-    align-content:center;
-    /* font-size: 18px; */
-    font-weight: bold;
-    ${props =>
-      props.difficulty? getColor(props.difficulty,props.isSelected,'color') : null};
-    
+  margin: 10px 0 0 10px;
+  width: 30px;
+  height: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+  font-weight: bold;
+  ${props =>
+    props.difficulty
+      ? getColor(props.difficulty, props.isSelected, "color")
+      : null};
 `;
 
 export const Header = styled.div`
@@ -77,14 +73,8 @@ export const Header = styled.div`
     padding: 10px 20px 10px 10px;
     height: 50px;
     color: #053d57;
-    /* font-size: 17px; */
-    /* ${props =>
-      props.isSelected
-        ? "text-shadow: 2px 2px 5px rgba(128,128,128,0.4)"
-        : null}; */
   }
   div {
-    /* margin-right: -7px; */
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;

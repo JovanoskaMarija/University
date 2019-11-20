@@ -49,9 +49,6 @@ export const Header = styled.div`
         overflow: hidden;
         max-height: 500px;
         padding-top: 10px;
-        /* margin: 10px; */
-        /* padding: 20px; */
-        /* background-color: red; */
       }
     }
   }
