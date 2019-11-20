@@ -29,7 +29,7 @@ const Subject = props => {
         difficulty={props.data.difficulty}
       />
       <Content>
-        <Header isSelected={props.data.isSelected}>
+        <Header>
           <DifficultyLevel
           
             difficulty={props.data.difficulty}

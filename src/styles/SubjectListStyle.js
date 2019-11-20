@@ -7,7 +7,6 @@ export const Container = styled.div`
   display: flex;
   justify-content: space-evenly;
   box-sizing: border-box;
-  /* margin-top: 30px; */
   padding: 20px;
   background-color: #F2F1EF;
   overflow-y: scroll;

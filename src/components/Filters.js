@@ -39,7 +39,6 @@ const Filters = props => {
   };
 
   const handleSortBy = e => {
-    //console.log(e.target);
     let { value } = e.target;
     if (value === null) {
       value = "default";
@@ -343,7 +342,6 @@ const Filters = props => {
       <Container>
         <ToggleFilters>
           <Dropdown
-            // key={props.name}
             value={sortedBy}
             options={options}
             onChange={handleSortBy}

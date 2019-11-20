@@ -47,47 +47,4 @@ const Menu = () => {
     </Header>
   );
 };
-
-// class Menu extends React.Component {
-//   constructor(props) {
-//     super(props);
-//     this.state = {
-//       isExpanded: false
-//     };
-//   }
-//   handleToggle = e => {
-//     e.preventDefault();
-//     this.setState(
-//       {
-//         isExpanded: !this.state.isExpanded
-//       },
-//       console.log("Posle", this.state.isExpanded)
-//     );
-//   };
-
-//   render() {
-//     const { isExpanded } = this.state;
-//     return (
-//       <Header>
-//         <NavigationBar>
-//           <NavLink to="/">University</NavLink>
-//         </NavigationBar>
-//         <div
-//           className="menu-icon"
-//           aria-hidden="true"
-//           onClick={e => this.handleToggle(e)}
-//         >
-//           <MenuIcon />
-//         </div>
-//         <NavigationBar>
-//           <ul className={`collapsed ${isExpanded ? "is-expanded" : ""}`}>
-//             <NavLink to="/subjects">Subjects</NavLink>
-//             <NavLink to="/selected">Selected</NavLink>
-//           </ul>
-//         </NavigationBar>
-//       </Header>
-//     );
-//   }
-// }
-
 export default Menu;

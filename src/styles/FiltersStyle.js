@@ -20,7 +20,6 @@ export const Filter = styled.div`
     align-items: center;
     justify-content: center
   }
- 
 `;
 
 export const Separator = styled.div`

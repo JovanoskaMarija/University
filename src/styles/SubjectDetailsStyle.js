@@ -21,7 +21,6 @@ height: 92vh;
     box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
     background-color: #349cc7;
   }
-
 `;
 
 export const Header = styled.div`

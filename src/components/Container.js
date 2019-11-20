@@ -28,7 +28,7 @@ const Container = () => {
     filterIsSelected: [],
     filterIsPassed: []
   });
-  // const [sortedBy, setSortedBy] = useState("default");
+
   const [sortedBy, setSortedBy] = useState({
     sortBy:'',
     sortIn:''
@@ -91,97 +91,6 @@ const Container = () => {
     setSubjects(sortedSubjects);
     return sortedSubjects 
   }
-
-  // const sortBy = (value) => {
-  //   let sortedSubjects;
-
-  //    if (value === sortedBy) {
-  //     return;
-  //   }
-  //   if (value === "a-z") {
-  //     sortedSubjects = [...subjects].sort((a, b) => {
-  //       if (a.name < b.name) return -1;
-  //       else if (a.name > b.name) return 1;
-  //       return 0;
-  //     });
-  //   }
-  //   if (value === "z-a") {
-  //     sortedSubjects = [...subjects].sort((a, b) => {
-  //       if (a.name > b.name) return -1;
-  //       else if (a.name < b.name) return 1;
-  //       return 0;
-  //     });
-  //   }
-    
-  //   if (value === "semester") {
-  //     sortedSubjects = [...subjects].sort((a, b) => {
-  //       if (a.semester < b.semester) return -1;
-  //       else if (a.semester > b.semester) return 1;
-  //       return 0;
-  //     });
-  //   }
-
-  //   if (value === "easies-first") {
-  //     sortedSubjects = [...subjects].sort((a, b) => {
-  //       if (a.difficulty < b.difficulty) return -1;
-  //       else if (a.difficulty > b.difficulty) return 1;
-  //       return 0;
-  //     });
-  //   }
-  //   if (value === "hardest-first") {
-  //     sortedSubjects = [...subjects].sort((a, b) => {
-  //       if (a.difficulty > b.difficulty) return -1;
-  //       else if (a.difficulty < b.difficulty) return 1;
-  //       return 0;
-  //     });
-  //   }
-    
-  //   if (value === "less-popular") {
-  //     sortedSubjects = [...subjects].sort((a, b) => {
-  //       if (a.studentsAttending < b.studentsAttending) return -1;
-  //       else if (a.studentsAttending > b.studentsAttending) return 1;
-  //       return 0;
-  //     });
-  //   }
-    
-  //   if (value === "most-popular") {
-  //     sortedSubjects = [...subjects].sort((a, b) => {
-  //       if (a.studentsAttending > b.studentsAttending) return -1;
-  //       else if (a.studentsAttendingb< b.studentsAttending) return 1;
-  //       return 0;
-  //     });
-  //   }
-
-        
-  //   if (value === "lowest-grade") {
-  //     sortedSubjects = [...subjects].sort((a, b) => {
-  //       if (a.averageGrade < b.averageGrade) return -1;
-  //       else if (a.averageGrade > b.studentsAttending) return 1;
-  //       return 0;
-  //     });
-  //   }
-    
-  //   if (value === "highest-grade") {
-  //     sortedSubjects = [...subjects].sort((a, b) => {
-  //       if (a.averageGrade > b.averageGrade) return -1;
-  //       else if (a.averageGrade < b.averageGrade) return 1;
-  //       return 0;
-  //     });
-  //   }
-
-
-  //   if (value === "default") {
-  //     sortedSubjects = [...subjects].sort((a, b) => {
-  //       if (a._id < b._id) return -1;
-  //       else if (a._id > b._id) return 1;
-  //       return 0;
-  //     });
-  //   }
-  //   setSubjects(sortedSubjects);
-  //   setSortedBy(value);
-  //   return sortedSubjects;
-  // };
-
   const filterByProfessor = subject => {
     return subject.professor
       .toLowerCase()
@@ -236,7 +145,6 @@ const Container = () => {
     } else{
       return parseInt(subject.difficulty) === 10;
     }
-    // return filters.filterDifficulty.includes(subject.difficulty);
   };
 
   const filterBySelected = subject => {
