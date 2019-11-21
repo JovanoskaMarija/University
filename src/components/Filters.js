@@ -82,13 +82,22 @@ const Filters = props => {
         sortBy: "averageGrade",
         sortIn: "desc"
       },
-      default: {
+      "lowest-passed-percentage": {
+        sortBy: "passedPercentage",
+        sortIn: "asc"
+      },
+      "highest-passed-percentage": {
+        sortBy: "passedPercentage",
+        sortIn: "desc"
+      },
+      "default": {
         sortBy: "_id",
         sortIn: "asc"
       }
     };
 
     setSortedBy(value);
+    //destructuring
     const { sortBy, sortIn } = sortOptionsMapping[value];
     props.sortData(sortBy, sortIn);
   };
@@ -103,7 +112,9 @@ const Filters = props => {
     { label: "Less Popular Subject", value: "less-popular" },
     { label: "Most Popular Subject", value: "most-popular" },
     { label: "Lowest Average Grade", value: "lowest-grade" },
-    { label: "Highest Average Grade", value: "highest-grade" }
+    { label: "Highest Average Grade", value: "highest-grade" },
+    { label: "Highest passed percentage", value: "highest-passed-percentage" },
+    { label: "Lowest passed percentage", value: "lowest-passed-percentage" }
   ];
 
   const programOptions = [
@@ -150,9 +161,7 @@ const Filters = props => {
                 label="Professor"
                 onClick={e => filters.professorOverlayPanel.toggle(e)}
               />
-              <OverlayPanel
-                ref={el => (filters.professorOverlayPanel = el)}
-              >
+              <OverlayPanel ref={el => (filters.professorOverlayPanel = el)}>
                 <p>Enter Professor:</p>
                 <InputText
                   id="float-input"
@@ -173,9 +182,7 @@ const Filters = props => {
                 label="Subject Name"
                 onClick={e => filters.nameOverlayPanel.toggle(e)}
               />
-              <OverlayPanel
-                ref={el => (filters.nameOverlayPanel = el)}
-              >
+              <OverlayPanel ref={el => (filters.nameOverlayPanel = el)}>
                 <p>Enter Subject Name:</p>
                 <InputText
                   id="float-input"
@@ -196,9 +203,7 @@ const Filters = props => {
                 label="Faculty"
                 onClick={e => filters.facultyOverlayPanel.toggle(e)}
               />
-              <OverlayPanel
-                ref={el => (filters.facultyOverlayPanel = el)}
-              >
+              <OverlayPanel ref={el => (filters.facultyOverlayPanel = el)}>
                 <p>Enter Faculty:</p>
                 <InputText
                   id="float-input"
@@ -219,9 +224,7 @@ const Filters = props => {
                 label="Program"
                 onClick={e => filters.programOverlayPanel.toggle(e)}
               />
-              <OverlayPanel
-                ref={el => (filters.programOverlayPanel = el)}
-              >
+              <OverlayPanel ref={el => (filters.programOverlayPanel = el)}>
                 <p>Choose Program: </p>
                 <SelectButton
                   value={filters.program}
@@ -243,9 +246,7 @@ const Filters = props => {
                   filters.examOverlayPanel.toggle(e);
                 }}
               />
-              <OverlayPanel
-                ref={el => (filters.examOverlayPanel = el)}
-              >
+              <OverlayPanel ref={el => (filters.examOverlayPanel = el)}>
                 <p>Choose Exam Options:</p>
                 <SelectButton
                   value={filters.exam}
@@ -267,9 +268,7 @@ const Filters = props => {
                   filters.difficultyOverlayPanel.toggle(e);
                 }}
               />
-              <OverlayPanel
-                ref={el => (filters.difficultyOverlayPanel = el)}
-              >
+              <OverlayPanel ref={el => (filters.difficultyOverlayPanel = el)}>
                 <p>Choose Difficulty:</p>
                 <SelectButton
                   value={filters.difficulty}
@@ -290,9 +289,7 @@ const Filters = props => {
                   filters.semesterOverlayPanel.toggle(e);
                 }}
               />
-              <OverlayPanel
-                ref={el => (filters.semesterOverlayPanel = el)}
-              >
+              <OverlayPanel ref={el => (filters.semesterOverlayPanel = el)}>
                 <p>Choose Semester:</p>
                 <SelectButton
                   value={filters.semester}
@@ -313,9 +310,7 @@ const Filters = props => {
                   filters.passedOverlayPanel.toggle(e);
                 }}
               />
-              <OverlayPanel
-                ref={el => (filters.passedOverlayPanel = el)}
-              >
+              <OverlayPanel ref={el => (filters.passedOverlayPanel = el)}>
                 <p>Choose Passed Subjects:</p>
                 <SelectButton
                   value={filters.isPassed}
@@ -332,8 +327,16 @@ const Filters = props => {
         )}
       </Container>
 
-        <p style={{display: "flex", flexDirection: "row-reverse", marginRight: "20px"}}>Subjects shown: {props.filteredData.length}</p>
-     
+      <p
+        style={{
+          display: "flex",
+          flexDirection: "row-reverse",
+          marginRight: "20px"
+        }}
+      >
+        Subjects shown: {props.filteredData.length}
+      </p>
+
       <Container>
         <ToggleFilters>
           <Dropdown

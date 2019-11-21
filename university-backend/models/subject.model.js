@@ -18,7 +18,9 @@ const subjectSchema = new Schema({
   studentsAttending: Number,
   averageGrade: Number,
   isSelected: Boolean,
-  isPassed: Boolean
+  isPassed: Boolean,
+  isCurrentlyListening: Boolean,
+  passedPercentage: Number,
 });
 
 const Subject = mongoose.model("Subject", subjectSchema);
