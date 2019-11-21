@@ -331,6 +331,9 @@ const Filters = props => {
           </Filter>
         )}
       </Container>
+
+        <p style={{display: "flex", flexDirection: "row-reverse", marginRight: "20px"}}>Subjects shown: {props.filteredData.length}</p>
+     
       <Container>
         <ToggleFilters>
           <Dropdown
