@@ -22,6 +22,7 @@ const SubjectsContainer = props => {
         <SubjectList
           handleSelected={props.handleSelected}
           handlePassed={props.handlePassed}
+          handleCurrentlyListening={props.handleCurrentlyListening}
           filteredData={props.filteredData}
           path="/"
         />
@@ -29,6 +30,7 @@ const SubjectsContainer = props => {
         <SubjectList
           handleSelected={props.handleSelected}
           handlePassed={props.handlePassed}
+          handleCurrentlyListening={props.handleCurrentlyListening}
           filteredData={props.filterSelected}
           path="/"
         />

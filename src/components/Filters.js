@@ -151,7 +151,6 @@ const Filters = props => {
                 onClick={e => filters.professorOverlayPanel.toggle(e)}
               />
               <OverlayPanel
-                style={{ backgroundColor: "#F2F1EF" }}
                 ref={el => (filters.professorOverlayPanel = el)}
               >
                 <p>Enter Professor:</p>
@@ -175,7 +174,6 @@ const Filters = props => {
                 onClick={e => filters.nameOverlayPanel.toggle(e)}
               />
               <OverlayPanel
-                style={{ backgroundColor: "#F2F1EF" }}
                 ref={el => (filters.nameOverlayPanel = el)}
               >
                 <p>Enter Subject Name:</p>
@@ -199,7 +197,6 @@ const Filters = props => {
                 onClick={e => filters.facultyOverlayPanel.toggle(e)}
               />
               <OverlayPanel
-                style={{ backgroundColor: "#F2F1EF" }}
                 ref={el => (filters.facultyOverlayPanel = el)}
               >
                 <p>Enter Faculty:</p>
@@ -223,7 +220,6 @@ const Filters = props => {
                 onClick={e => filters.programOverlayPanel.toggle(e)}
               />
               <OverlayPanel
-                style={{ backgroundColor: "#F2F1EF" }}
                 ref={el => (filters.programOverlayPanel = el)}
               >
                 <p>Choose Program: </p>
@@ -248,7 +244,6 @@ const Filters = props => {
                 }}
               />
               <OverlayPanel
-                style={{ backgroundColor: "#F2F1EF" }}
                 ref={el => (filters.examOverlayPanel = el)}
               >
                 <p>Choose Exam Options:</p>
@@ -273,7 +268,6 @@ const Filters = props => {
                 }}
               />
               <OverlayPanel
-                style={{ backgroundColor: "#F2F1EF" }}
                 ref={el => (filters.difficultyOverlayPanel = el)}
               >
                 <p>Choose Difficulty:</p>
@@ -297,7 +291,6 @@ const Filters = props => {
                 }}
               />
               <OverlayPanel
-                style={{ backgroundColor: "#F2F1EF" }}
                 ref={el => (filters.semesterOverlayPanel = el)}
               >
                 <p>Choose Semester:</p>
@@ -321,7 +314,6 @@ const Filters = props => {
                 }}
               />
               <OverlayPanel
-                style={{ backgroundColor: "#F2F1EF" }}
                 ref={el => (filters.passedOverlayPanel = el)}
               >
                 <p>Choose Passed Subjects:</p>
