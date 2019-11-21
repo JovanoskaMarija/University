@@ -73,6 +73,19 @@ const Container = () => {
     setSubjects(newPassedList);
   };
 
+  const handleCurrentlyListening = subjectID => {
+    const newList = subjects.map(subject => {
+      if(subject._id === subjectID) {
+        const newSubject = subject;
+        newSubject.isCurrentlyListening = !subject.isCurrentlyListening;
+        return newSubject;
+      } else {
+        return subject;
+      }
+    })
+    setSubjects(newList)
+  }
+
   const sortData = (sortBy, sortIn) => {
     let sortedSubjects;
 
@@ -203,6 +216,7 @@ const Container = () => {
           onFilterChange={onFilterChange}
           handleSelected={handleSelected}
           handlePassed={handlePassed}
+          handleCurrentlyListening={handleCurrentlyListening}
           sortBy={sortedBy.sortBy}
           sortIn={sortedBy.sortIn}
           sortData={sortData}
@@ -219,6 +233,7 @@ const Container = () => {
           onFilterChange={onFilterChange}
           handleSelected={handleSelected}
           handlePassed={handlePassed}
+          handleCurrentlyListening={handleCurrentlyListening}
           sortBy={sortedBy.sortBy}
           sortIn={sortedBy.sortIn}
           sortData={sortData}

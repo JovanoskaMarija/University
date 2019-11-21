@@ -4,7 +4,7 @@ import Subject from "./Subject.js";
 
 const SubjectList = props => {
   
-    const { filteredData, handleSelected, handlePassed } = props;
+    const { filteredData, handleSelected, handlePassed, handleCurrentlyListening } = props;
     return (
       <Container>
         <List>
@@ -15,6 +15,7 @@ const SubjectList = props => {
                 data={subject}
                 handleSelected={handleSelected}
                 handlePassed={handlePassed}
+                handleCurrentlyListening={handleCurrentlyListening}
               />
             );
           })}
