@@ -9,15 +9,8 @@ const SubjectsContainer = props => {
     <div>
       <Filters
         filteredData={props.filteredData}
-        filterProfessor={props.filterProfessor}
-        filterName={props.filterName}
-        filterFaculty={props.filterFaculty}
-        filterProgram={props.filterProgram}
-        filterIsSelected={props.filterIsSelected}
-        filterIsPassed={props.IsPassed}
         onFilterChange={props.onFilterChange}
         sortData={props.sortData}
-        filteredData={props.filteredData}
       />
       <Router>
         <SubjectList
