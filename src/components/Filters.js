@@ -128,14 +128,14 @@ const Filters = props => {
   ];
 
   const semesterOptions = [
-    { label: "Winter", value: "winter" },
-    { label: "Summer", value: "summer" }
+    { label: "Winter", value: 1},
+    { label: "Summer", value: 2 }
   ];
 
   const difficultyOptions = [
-    { label: "Easy", value: "easy" },
-    { label: "Medium", value: "medium" },
-    { label: "Difficult", value: "difficult" }
+    { label: "Easy", value: [1,4] },
+    { label: "Medium", value: [5,8] },
+    { label: "Difficult", value: [9,10] }
   ];
 
   const isPassedOptions = [{ label: "Passed", value: true }];
@@ -327,18 +327,22 @@ const Filters = props => {
         )}
       </Container>
 
-      <p
+      <p style={{ display: "flex", flexDirection: "row-reverse", marginRight: "20px" }} >
+        Subjects shown: {props.filteredData.length}
+      </p>
+
+
+      <Container>
+        <ToggleFilters>
+        <p
         style={{
           display: "flex",
           flexDirection: "row-reverse",
-          marginRight: "20px"
+          // marginRight: "20px"
         }}
       >
         Subjects shown: {props.filteredData.length}
       </p>
-
-      <Container>
-        <ToggleFilters>
           <Dropdown
             value={sortedBy}
             options={options}
@@ -346,6 +350,7 @@ const Filters = props => {
             tooltip="Sort By"
             tooltipOptions={{ position: "bottom" }}
           />
+
         </ToggleFilters>
       </Container>
     </div>
