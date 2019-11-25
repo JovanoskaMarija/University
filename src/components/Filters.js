@@ -13,7 +13,7 @@ import { OverlayPanel } from "primereact/overlaypanel";
 import { Dropdown } from "primereact/dropdown";
 
 const Filters = props => {
-  const [showFilters, setShowFilters] = useState(true);
+  // const [showFilters, setShowFilters] = useState(false);
   const [filters, setFilters] = useState({
     professor: "",
     program: "",
@@ -25,9 +25,9 @@ const Filters = props => {
 
   const [sortedBy, setSortedBy] = useState("default");
 
-  const onShowFilters = () => {
-    setShowFilters(!showFilters);
-  };
+  // const onShowFilters = () => {
+  //   setShowFilters(!showFilters);
+  // };
 
   const handleChange = e => {
     let { name, value } = e.target;
@@ -148,12 +148,12 @@ const Filters = props => {
             style={{ width: "120px" }}
             onLabel="Show Filters"
             offLabel="Hide Filters"
-            checked={!showFilters}
-            onChange={onShowFilters}
+            checked={!props.showFilters}
+            onChange={props.onShowFilters}
           />
         </ToggleFilters>
 
-        {showFilters && (
+        {props.showFilters && (
           <Filter>
             <Separator>
               <Button
@@ -327,9 +327,9 @@ const Filters = props => {
         )}
       </Container>
 
-      <p style={{ display: "flex", flexDirection: "row-reverse", marginRight: "20px" }} >
+      {/* <p style={{ display: "flex", flexDirection: "row-reverse", marginRight: "20px" }} >
         Subjects shown: {props.filteredData.length}
-      </p>
+      </p> */}
 
 
       <Container>

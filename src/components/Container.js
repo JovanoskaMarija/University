@@ -36,6 +36,13 @@ const Container = () => {
     sortIn: ""
   });
 
+  const [showFilters, setShowFilters] = useState(false);
+
+  const onShowFilters = () => {
+    setShowFilters(!showFilters);
+  };
+
+
   useEffect(() => {
     fetch("http://localhost:5000/subjects/", { method: "get" })
       .then(res => res.json())
@@ -135,6 +142,8 @@ const Container = () => {
           sortBy={sortedBy.sortBy}
           sortIn={sortedBy.sortIn}
           sortData={sortData}
+          showFilters={showFilters}
+          onShowFilters={onShowFilters}
         />
         <SubjectsContainer
           path="/selected"
@@ -146,6 +155,7 @@ const Container = () => {
           sortBy={sortedBy.sortBy}
           sortIn={sortedBy.sortIn}
           sortData={sortData}
+          showFilters={showFilters}
         />
         <SubjectDetails
           data={data}

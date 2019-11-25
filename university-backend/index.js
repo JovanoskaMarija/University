@@ -1,7 +1,7 @@
-const express = require('express');
-const cors = require('cors');
-const mongoose = require('mongoose');
-const subjectsRouter = require('./routes/subjects')
+const express = require("express");
+const cors = require("cors");
+const mongoose = require("mongoose");
+const subjectsRouter = require("./routes/subjects");
 
 require("dotenv").config();
 
@@ -12,13 +12,19 @@ const apiPort = 5000;
 app.use(express.urlencoded({ extended: true }));
 app.use(cors({ origin: true, credentials: true }));
 app.use(express.json());
-app.use('/subjects', subjectsRouter)
+app.use("/subjects", subjectsRouter);
 
 //assign the link saved in the var ATLAS_URI in .env file to uri constant
 const uri = process.env.ATLAS_URI;
 
 //MongoClient constructor       (connect the database)
-mongoose.connect(uri, { useNewUrlParser: true, useCreateIndex: true, useUnifiedTopology: true  });
+mongoose
+  .connect(uri, {
+    useNewUrlParser: true,
+    useCreateIndex: true,
+    useUnifiedTopology: true
+  })
+  .catch(err => console.log(err));
 const connection = mongoose.connection;
 
 //once the connection is established console.log()

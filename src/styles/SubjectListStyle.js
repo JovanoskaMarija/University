@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const Container = styled.div`
-  height: calc(100vh - 129.2px );
+  height: calc(100vh - 256px );
   overflow-y: scroll;
   margin: auto;
   display: flex;
@@ -23,6 +23,43 @@ export const Container = styled.div`
     border-radius: 10px;
     box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
     background-color: #349cc7;
+  }
+  @media only screen and (max-width: 1035px){
+    ${props =>
+    props.showFilters === true
+      ? "height: calc(100vh - 309.2px );"
+      : "height: calc(100vh - 256px );"};
+  }
+  @media only screen and (max-width: 635px){
+    ${props =>
+    props.showFilters === true
+      ? "height: calc(100vh - 362.4px );"
+      : "height: calc(100vh - 256px );"};
+  }
+  @media only screen and (max-width: 495px){
+    ${props =>
+    props.showFilters === true
+      ? "height: calc(100vh - 415.6px );"
+      : "height: calc(100vh - 256px );"};
+  }
+  @media only screen and (max-width: 431px){
+    height: calc(100vh - 468.8px );
+    ${props =>
+    props.showFilters === true
+      ? "height: calc(100vh -  468.8px );"
+      : "height: calc(100vh - 256px );"};
+  }
+  @media only screen and (max-width: 386px){
+    ${props =>
+    props.showFilters === true
+      ? "height: calc(100vh - 575.2px );"
+      : "height: calc(100vh - 256px );"}
+  }
+  @media only screen and (max-width: 375px){
+    ${props =>
+    props.showFilters === true
+      ? "height: calc(100vh - 628.4px );"
+      : "height: calc(100vh - 256px );"}
   }
 `;
 

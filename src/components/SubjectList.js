@@ -6,7 +6,7 @@ const SubjectList = props => {
   
     const { filteredData, handleSelected, handlePassed, handleCurrentlyListening } = props;
     return (
-      <Container>
+      <Container showFilters={props.showFilters}>
         <List>
           {filteredData.map(subject => {
             return (

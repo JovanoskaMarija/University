@@ -11,6 +11,8 @@ const SubjectsContainer = props => {
         filteredData={props.filteredData}
         onFilterChange={props.onFilterChange}
         sortData={props.sortData}
+        showFilters={props.showFilters}
+        onShowFilters={props.onShowFilters}
       />
       <Router>
         <SubjectList
@@ -18,6 +20,7 @@ const SubjectsContainer = props => {
           handlePassed={props.handlePassed}
           handleCurrentlyListening={props.handleCurrentlyListening}
           filteredData={props.filteredData}
+          showFilters={props.showFilters}
           path="/"
         />
 
@@ -26,6 +29,7 @@ const SubjectsContainer = props => {
           handlePassed={props.handlePassed}
           handleCurrentlyListening={props.handleCurrentlyListening}
           filteredData={props.filterSelected}
+          showFilters={props.showFilters}
           path="/"
         />
       </Router>
